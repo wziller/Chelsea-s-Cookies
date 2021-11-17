@@ -4,8 +4,6 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-import boto3
-from config import S3_BUCKET, S3_KEY, S3_SECRET
 
 from .models import db, User, Order, Product, Order_Detail, Review, Gallery_Item, Category, Custom_Order, Custom_Option, Color, Type
 from .api.user_routes import user_routes
@@ -15,20 +13,12 @@ from .seeds import seed_commands
 
 from .config import Config
 
-s3 = boto3.client(
-    's3',
-    aws_access_key_id=S3_KEY,
-    aws_secret_access_key=S3_SECRET)
+
 
 
 
 app = Flask(__name__)
 
-@app.route('/photos')
-def photos():
-    s3_resource = boto3.resource('s3')
-    my_bucket = s3_resource.Bucket(S3_BUCKET)
-    summaries = my_bucket.object.all()
 
 
 # Setup login manager

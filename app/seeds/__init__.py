@@ -1,10 +1,15 @@
 from flask.cli import AppGroup
+
+from app.seeds.orders import undo_orders
 from .users import seed_users, undo_users
 from .colors import seed_colors, undo_colors
 from .types import seed_types, undo_types
 from .categories import seed_categories, undo_categories
 from .reviews import seed_reviews, undo_reviews
 from .products import seed_products, undo_products
+from .gallery import seed_gallery, undo_gallery
+from .orders import seed_orders, undo_orders
+from .order_detail import seed_order_details, undo_orders_details
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -20,6 +25,9 @@ def seed():
     seed_categories()
     seed_products()
     seed_reviews()
+    seed_gallery()
+    seed_orders()
+    seed_order_details()
 
     # Add other seed functions here
 
@@ -33,5 +41,8 @@ def undo():
     undo_categories()
     undo_products()
     undo_reviews()
+    undo_gallery()
+    undo_orders()
+    undo_orders_details()
 
     # Add other undo functions here
