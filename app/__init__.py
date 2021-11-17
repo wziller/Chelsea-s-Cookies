@@ -8,6 +8,8 @@ from flask_login import LoginManager
 from .models import db, User, Order, Product, Order_Detail, Review, Gallery_Item, Category, Custom_Order, Custom_Option, Color, Type
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.color_routes import color_routes
+from .api.type_routes import type_routes
 
 from .seeds import seed_commands
 
@@ -37,6 +39,8 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(color_routes, url_prefix='/api/colors')
+app.register_blueprint(type_routes, url_prefix='/api/types')
 db.init_app(app)
 Migrate(app, db)
 

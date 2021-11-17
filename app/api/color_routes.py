@@ -11,7 +11,7 @@ color_routes = Blueprint('colors', __name__)
 @color_routes.route('/')
 def servers():
     colors = Color.query.all()
-    return {[color.to_dict() for color in colors]}
+    return {"colors":[color.to_dict() for color in colors]}
 
 # GET by Id route
 @color_routes.route('/<int:id>')
@@ -37,7 +37,7 @@ def color_post():
     )
     db.session.add(color)
     db.session.commit()
-    return server.to_dict()
+    return color.to_dict()
   else:
     print(form.errors)
     return "Bad data"

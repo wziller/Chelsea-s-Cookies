@@ -14,7 +14,7 @@ class Color(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'color_name': self.category_name,
+            'color_name': self.color_name,
             'created_on': self.created_on,
             'updated_on': self.updated_on,
         }
