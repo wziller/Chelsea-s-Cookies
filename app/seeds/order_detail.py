@@ -43,5 +43,5 @@ def seed_order_details():
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_orders_details():
-    db.session.execute('TRUNCATE orders RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE order_details RESTART IDENTITY CASCADE;')
     db.session.commit()

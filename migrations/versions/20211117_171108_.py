@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 497b2acc1f33
+Revision ID: 7ec7ad15d044
 Revises: 
-Create Date: 2021-11-17 15:34:32.082381
+Create Date: 2021-11-17 17:11:08.899544
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '497b2acc1f33'
+revision = '7ec7ad15d044'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -57,16 +57,16 @@ def upgrade():
     op.create_table('custom_options',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('type_id', sa.Integer(), nullable=False),
-    sa.Column('color_id', sa.Integer(), nullable=False),
+    sa.Column('more_colors', sa.Boolean(), nullable=False),
     sa.Column('gold', sa.Boolean(), nullable=False),
     sa.Column('silver', sa.Boolean(), nullable=False),
     sa.Column('logo', sa.Boolean(), nullable=False),
     sa.Column('custom_shape', sa.Boolean(), nullable=False),
     sa.Column('air_brushing', sa.Boolean(), nullable=False),
+    sa.Column('flowers', sa.Boolean(), nullable=False),
     sa.Column('logo_image', sa.String(length=255), nullable=True),
     sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
-    sa.ForeignKeyConstraint(['color_id'], ['colors.id'], ),
     sa.ForeignKeyConstraint(['type_id'], ['product_types.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
