@@ -21,5 +21,5 @@ class Product(db.Model):
             'price': self.price,
             'created_on': self.created_on,
             'updated_on': self.updated_on,
-            'category': [order_details.to_dict() for order_details in self.details]
+            'category': self.category
         }
