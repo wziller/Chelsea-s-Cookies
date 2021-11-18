@@ -1,3 +1,4 @@
+from app.models import order_detail
 from .db import db
 
 class Order(db.Model):
@@ -5,6 +6,7 @@ class Order(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer(),db.ForeignKey('users.id'), nullable=False)
+    details_id = db.relationship("Order_Detail", backref=db.backref('order_details', lazy=True))
     delivery_date = db.Column(db.DateTime)
     delivery_address = db.Column(db.String(120), nullable=False)
     status = db.Column(db.String(120), nullable=False)
@@ -16,8 +18,9 @@ class Order(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'details_id': self.details_id,
+            'details_id': [details.to_dict() for details in self.details_id],
             'delivery_address': self.delivery_address,
             'status': self.status,
-            'details': [order_details.to_dict() for order_details in self.details]
+            'created_on': self.created_on,
+            'updated_on': self.updated_on,
         }

@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 7ec7ad15d044
+Revision ID: fee21786794e
 Revises: 
-Create Date: 2021-11-17 17:11:08.899544
+Create Date: 2021-11-18 13:45:24.589834
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7ec7ad15d044'
+revision = 'fee21786794e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -48,26 +48,22 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('phone', sa.String(length=40), nullable=False),
     sa.Column('administrator', sa.Boolean(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-    op.create_table('custom_options',
+    op.create_table('custom_orders',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('type_id', sa.Integer(), nullable=False),
-    sa.Column('more_colors', sa.Boolean(), nullable=False),
-    sa.Column('gold', sa.Boolean(), nullable=False),
-    sa.Column('silver', sa.Boolean(), nullable=False),
-    sa.Column('logo', sa.Boolean(), nullable=False),
-    sa.Column('custom_shape', sa.Boolean(), nullable=False),
-    sa.Column('air_brushing', sa.Boolean(), nullable=False),
-    sa.Column('flowers', sa.Boolean(), nullable=False),
-    sa.Column('logo_image', sa.String(length=255), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('description', sa.String(length=800), nullable=False),
+    sa.Column('delivery_date', sa.DateTime(), nullable=True),
+    sa.Column('delivery_address', sa.String(length=120), nullable=False),
+    sa.Column('status', sa.String(length=120), nullable=False),
     sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
-    sa.ForeignKeyConstraint(['type_id'], ['product_types.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('orders',
@@ -92,19 +88,22 @@ def upgrade():
     sa.ForeignKeyConstraint(['category'], ['product_categories.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('custom_orders',
+    op.create_table('custom_options',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('description', sa.String(length=800), nullable=False),
-    sa.Column('options_id', sa.Integer(), nullable=False),
-    sa.Column('delivery_date', sa.DateTime(), nullable=True),
-    sa.Column('delivery_address', sa.String(length=120), nullable=False),
-    sa.Column('suggestion_images', sa.String(length=800), nullable=False),
-    sa.Column('status', sa.String(length=120), nullable=False),
+    sa.Column('custom_order_id', sa.Integer(), nullable=False),
+    sa.Column('type_id', sa.Integer(), nullable=False),
+    sa.Column('more_colors', sa.Boolean(), nullable=False),
+    sa.Column('gold', sa.Boolean(), nullable=False),
+    sa.Column('silver', sa.Boolean(), nullable=False),
+    sa.Column('logo', sa.Boolean(), nullable=False),
+    sa.Column('custom_shape', sa.Boolean(), nullable=False),
+    sa.Column('air_brushing', sa.Boolean(), nullable=False),
+    sa.Column('flowers', sa.Boolean(), nullable=False),
+    sa.Column('logo_image', sa.String(length=255), nullable=True),
     sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
-    sa.ForeignKeyConstraint(['options_id'], ['custom_options.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['custom_order_id'], ['custom_orders.id'], ),
+    sa.ForeignKeyConstraint(['type_id'], ['product_types.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('gallery',
@@ -112,8 +111,8 @@ def upgrade():
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.Column('image', sa.String(length=250), nullable=False),
     sa.Column('description', sa.String(length=800), nullable=False),
-    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -122,10 +121,19 @@ def upgrade():
     sa.Column('order_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.Column('quantity', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('reference_images',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('custom_order_id', sa.Integer(), nullable=False),
+    sa.Column('image_link', sa.String(length=350), nullable=False),
+    sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
+    sa.ForeignKeyConstraint(['custom_order_id'], ['custom_orders.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reviews',
@@ -146,12 +154,13 @@ def upgrade():
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_table('reviews')
+    op.drop_table('reference_images')
     op.drop_table('order_details')
     op.drop_table('gallery')
-    op.drop_table('custom_orders')
+    op.drop_table('custom_options')
     op.drop_table('products')
     op.drop_table('orders')
-    op.drop_table('custom_options')
+    op.drop_table('custom_orders')
     op.drop_table('users')
     op.drop_table('product_types')
     op.drop_table('product_categories')

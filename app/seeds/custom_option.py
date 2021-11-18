@@ -60,7 +60,6 @@ def fake_logo_image_generator(input):
 def seed_custom_options():
 
     for num in range(50):
-
         fake_type_id = randint(1,16)
         fake_logo = fake_boolean_generator()
         fake_more_colors = fake_boolean_generator()
@@ -68,6 +67,7 @@ def seed_custom_options():
 
         new_Custom_Options = Custom_Option(
             type_id = fake_type_id,
+            custom_order_id = num + 1,
             more_colors = fake_more_colors,
             gold = fake_boolean_generator(),
             silver = fake_boolean_generator(),

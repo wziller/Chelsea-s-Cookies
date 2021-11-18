@@ -6,10 +6,10 @@ class Custom_Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer(),db.ForeignKey('users.id'), nullable=False)
     description = db.Column(db.String(800), nullable=False)
-    options_id = db.Column(db.Integer(), db.ForeignKey('custom_options.id'), nullable=False)
+    options_id = db.relationship("Custom_Option", backref=db.backref('custom_options', lazy=True))
     delivery_date = db.Column(db.DateTime)
     delivery_address = db.Column(db.String(120), nullable=False)
-    suggestion_images = db.Column(db.String(800), nullable=False)
+    reference_images = db.relationship("Reference_Image", backref=db.backref('reference_images', lazy=True))
     status = db.Column(db.String(120), nullable=False)
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
@@ -19,11 +19,12 @@ class Custom_Order(db.Model):
         return {
             'id': self.id,
             'description': self.description,
-            'options_id': self.options_id,
+            'options': [options.to_dict() for options in self.options_id],
             'delivery_date': self.delivery_date,
             'delivery_address': self.delivery_address,
-            'suggestion_images': self.suggestion_images,
             'created_on': self.created_on,
+            'reference_images': [image.to_dict() for image in self.reference_images],
             'status': self.status,
-            'options': [custom_options.to_dict() for custom_options in self.custom_options]
+            'created_on': self.created_on,
+            'updated_on': self.updated_on,
         }

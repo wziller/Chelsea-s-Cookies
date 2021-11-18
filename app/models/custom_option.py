@@ -4,6 +4,7 @@ class Custom_Option(db.Model):
     __tablename__ = 'custom_options'
 
     id = db.Column(db.Integer, primary_key=True)
+    custom_order_id = db.Column(db.Integer(), db.ForeignKey('custom_orders.id'), nullable=False)
     type_id = db.Column(db.Integer(),db.ForeignKey('product_types.id'), nullable=False)
     more_colors = db.Column(db.Boolean(), nullable=False)
     gold = db.Column(db.Boolean(), nullable=False)
@@ -21,7 +22,8 @@ class Custom_Option(db.Model):
         return {
             'id': self.id,
             'type_id': self.type_id,
-            'color_id': self.color_id,
+            'custom_order_id': self.custom_order_id,
+            'more_colors': self.more_colors,
             'logo': self.logo,
             'custom_shape': self.custom_shape,
             'air_brushing': self.air_brushing,

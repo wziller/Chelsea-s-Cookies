@@ -7,8 +7,8 @@ class Order_Detail(db.Model):
     order_id = db.Column(db.Integer(), db.ForeignKey('orders.id'), nullable=False)
     product_id = db.Column(db.Integer(), db.ForeignKey('products.id'), nullable=False)
     quantity = db.Column(db.Integer(), nullable=False)
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
+    created_on = db.Column(db.DateTime, server_default=db.func.now())
+    updated_on = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
 

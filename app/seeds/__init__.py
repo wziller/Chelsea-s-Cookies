@@ -14,7 +14,7 @@ from .orders import seed_orders, undo_orders
 from .order_detail import seed_order_details, undo_orders_details
 from .custom_option import seed_custom_options, undo_custom_options
 from .custom_order import seed_custom_orders, undo_custom_orders
-
+from .reference_images import seed_reference_images, undo_reference_images
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
@@ -32,8 +32,9 @@ def seed():
     seed_gallery()
     seed_orders()
     seed_order_details()
-    seed_custom_options()
     seed_custom_orders()
+    seed_custom_options()
+    seed_reference_images()
 
     # Add other seed functions here
 
@@ -50,7 +51,8 @@ def undo():
     undo_gallery()
     undo_orders()
     undo_orders_details()
-    undo_custom_options()
     undo_custom_orders()
+    undo_custom_options()
+    undo_reference_images()
 
     # Add other undo functions here
