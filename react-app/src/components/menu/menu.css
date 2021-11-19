@@ -95,6 +95,7 @@ font-weight: var(fw-normal);
 font-size: 12pt;
 color: rgb(78, 235, 156);
 line-height: 1.6;
+backface-visibility: hidden;
 }
 
 
