@@ -13,12 +13,12 @@
     width:50%;
 }
 
-#individual_product_buttons_container{
+/* #individual_product_buttons_container{
     display: flex;
     justify-content: space-evenly;
     width:50%;
-}
-
+} */
+#individual_product_buttons_container,
 #individual_quantity_container{
     display: flex;
     justify-content: space-evenly;
