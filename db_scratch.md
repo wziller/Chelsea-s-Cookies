@@ -39,7 +39,7 @@
     npm start
 
 # setup heroku database
-    heroku run -a myherokuappname flask db upgrade heroku run -a myherokuappname flask seed all
+    heroku run -a chelseas-cookies flask db upgrade heroku run -a chelseas-cookies flask seed all
 
 
 - You should be able to see login prompt at localhost:3000 now (npm start should take you there automatically)
