@@ -74,7 +74,7 @@ export const editProduct = (updatedProduct) => async (dispatch) => {
   }
 };
 
-const initialState = {};
+const initialState = [];
 
 const productsReducer = (state = initialState, action) => {
   let newState;
