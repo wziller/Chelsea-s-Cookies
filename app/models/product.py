@@ -7,6 +7,7 @@ class Product(db.Model):
     name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(800), nullable=False)
     price = db.Column(db.Integer(), nullable=False)
+    image_link = db.Column(db.String(300), nullable=False)
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
     category = db.Column(db.Integer, db.ForeignKey('product_categories.id'), nullable=False)
@@ -19,7 +20,8 @@ class Product(db.Model):
             'name': self.name,
             'description': self.description,
             'price': self.price,
+            'image_link': self.image_link,
+            'category': self.category,
             'created_on': self.created_on,
-            'updated_on': self.updated_on,
-            'category': self.category
+            'updated_on': self.updated_on
         }

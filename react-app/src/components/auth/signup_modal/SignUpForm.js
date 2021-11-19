@@ -1,25 +1,37 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { signUp } from '../../../store/session';
+import './SignUpForm.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [phone, setPhone] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(firstName, lastName, username, email, phone, password));
       if (data) {
         setErrors(data)
       }
     }
+  };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateUsername = (e) => {
@@ -28,6 +40,10 @@ const SignUpForm = () => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const updatePhone = (e) => {
+    setPhone(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -50,8 +66,26 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
         <input
+          placeholder= 'First Name'
+          type='text'
+          name='firstname'
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <input
+          placeholder= 'Last Name'
+          type='text'
+          name='lastname'
+          onChange={updateLastName}
+          value={lastName}
+        ></input>
+      </div>
+      <div>
+        <input
+          placeholder= 'User Name'
           type='text'
           name='username'
           onChange={updateUsername}
@@ -59,8 +93,8 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Email</label>
         <input
+          placeholder= 'Email'
           type='text'
           name='email'
           onChange={updateEmail}
@@ -68,8 +102,17 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Password</label>
         <input
+          placeholder= 'Phone Number'
+          type='text'
+          name='phone'
+          onChange={updatePhone}
+          value={phone}
+        ></input>
+      </div>
+      <div>
+        <input
+          placeholder= 'Password'
           type='password'
           name='password'
           onChange={updatePassword}
@@ -77,8 +120,8 @@ const SignUpForm = () => {
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
+        placeholder='Repeat Password'
           type='password'
           name='repeat_password'
           onChange={updateRepeatPassword}

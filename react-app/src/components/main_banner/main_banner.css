@@ -1,0 +1,10 @@
+
+.main_banner{
+    background-image: url('https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/Banners/Test-home-banner.jpg');
+    width:100%;
+    height:650px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    position:relative;
+}

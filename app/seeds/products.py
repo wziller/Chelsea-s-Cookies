@@ -193,6 +193,39 @@ categories = [
         'Cheesecake',
         ]
 
+images = [
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-vanilla-cupcake.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-sandwich-cookies-red-velvet.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-sandwich-cookies-carrot-cake.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-monster-cookie-1.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-sugar.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-shortbread.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-red-velvet.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-poppyseed-thumbprint.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-peanut-butter.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-oatmeal-raisin.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-mexican-wedding.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-double-chocolate-pecan.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-coconut-macaroon.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-chocolate-mexican-wedding.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-chocolate-coconut-macaroon.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-homestyle-almond-toffee-crunch.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-giant-white-chocolate-macadamia.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-giant-smores.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-giant-molassas.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-giant-mm.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-giant-gf-snickerdoodle.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-cookie-cc.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-chocolate-cupcake.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-bars-snickers-brownie.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-bars-snickerdoodle-blondie.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-bars-raspberry-crumble.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-bars-pecan-pie.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-bars-lemon.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-bars-hello-dolly.png",
+    "https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/menu-bars-brownies.png"
+]
+
 def fake_name_generator(adjectives, categories, category_id):
     name = categories[category_id]
     adjective_count = randint(1,3)
@@ -212,6 +245,7 @@ def seed_products():
             name = fake_name_generator(adjectives, categories, category_id),
             description = fake_description,
             price = fake_price,
+            image_link = images[randint(0,24)],
             category = category_id + 1
             )
         db.session.add(new_Product)

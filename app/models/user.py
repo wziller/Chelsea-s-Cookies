@@ -42,6 +42,6 @@ class User(db.Model, UserMixin):
             'orders': self.orders,
             'reviews': self.reviews,
             'administrator': self.administrator,
-            'created_on': self.created_at,
-            'updated_on': self.updated_at
+            'created_on': self.created_on,
+            'updated_on': self.updated_on
         }
