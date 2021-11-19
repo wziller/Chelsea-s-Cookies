@@ -14,7 +14,7 @@ const addOneProduct = (payload) => ({
 });
 
 export const getProducts = () => async (dispatch) => {
-  const response = await fetch('api/products/')
+  const response = await fetch('/api/products/')
   if (response.ok) {
     const allProductsList = await response.json();
     dispatch(load(allProductsList));
@@ -30,7 +30,7 @@ export const getProductbyId = (id) => async (dispatch) => {
   }
 };
 
-export const creteProduct = (payload) => async (dispatch) => {
+export const createProduct = (payload) => async (dispatch) => {
   const response = await fetch(`/api/products/`, {
     method: "POST",
     headers: {

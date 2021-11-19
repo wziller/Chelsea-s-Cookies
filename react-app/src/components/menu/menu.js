@@ -15,19 +15,16 @@ const Menu = () => {
   useEffect(() => {}, [getProducts]);
 
   const products = useSelector((state) => {
-    console.log(state);
     return state.products["products"];
   });
 
   const divStyle = (src) => ({
     backgroundImage: "url(" + src + ")",
   });
-
-  console.log(products);
   return products ? (
     <div className="products_container">
       {products.map((product) => (
-        <NavLink to={`products/${product.id}`}>
+        <NavLink to={`/individualproduct/${product.id}`}>
           <div className="card">
             <div className="card_content">
               <div className="card_front" style={divStyle(product.image_link)}>

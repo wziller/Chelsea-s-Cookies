@@ -1,5 +1,19 @@
+import { useEffect } from "react"
+import { useState } from "react"
+import { getProductbyId, getProducts } from "../../store/product"
+import { useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 
 const IndividualProductWindow = ({product}) => {
+    const dispatch = useDispatch()
+    const [currentQuantity, setCurrentQuantity] = useState(0)
+    const handlePlus = () =>{
+        setCurrentQuantity(currentQuantity + 1)
+    }
+
+    const handleMinus = () =>{
+      currentQuantity === 0 ? setCurrentQuantity(0) : setCurrentQuantity(currentQuantity - 1)
+    }
     return(
         <div id="individual_product_container">
             <div id="individual_product_window">
@@ -9,12 +23,13 @@ const IndividualProductWindow = ({product}) => {
                     <p id="individual_product_description">{product.description}</p>
                 </div>
                 <div id= "individual_product_buttons_container">
-                    <p id= "individual_product_price">{`$${product.price}`}</p>
+                    <p id= "individual_product_price">{`Price per dozen: $${product.price}`}</p>
                     <div id= "individual_quantity_container">
-                        <button>minus</button>
-                        <p>Quantity</p>
-                        <button>plus</button>
+                        <i className="fas fa-minus" onClick= {handleMinus}></i>
+                        <p>{currentQuantity}</p>
+                        <i className="fas fa-plus" onClick= {handlePlus}></i>
                     </div>
+                    <p>{`Total: $${(product.price * currentQuantity)}`}</p>
                     <button id= "individual_product_add_to_cart_btn">Add to Cart</button>
                 </div>
             </div>

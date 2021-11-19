@@ -42,7 +42,7 @@ function App() {
         <Route path='/menu' exact={true} >
           <MenuPage/>
         </Route>
-        <Route path='/products/:productId' exact={true} >
+        <Route path='/individualproduct/:productId' exact={true} >
           <IndividualProductPage/>
         </Route>
       </Switch>

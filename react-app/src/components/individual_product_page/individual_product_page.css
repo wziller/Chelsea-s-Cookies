@@ -13,14 +13,17 @@
     width:50%;
 }
 
-/* #individual_product_buttons_container{
+#individual_product_buttons_container{
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     width:50%;
-} */
-#individual_product_buttons_container,
+    border: 2px solid black;
+}
+
 #individual_quantity_container{
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     width:50%;
 }
