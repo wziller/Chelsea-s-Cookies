@@ -7,8 +7,15 @@ import SignUpModal from "../auth/signup_modal/index";
 import LogoutButton from "../auth/LogoutButton";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({cartStatus, setCartStatus}) => {
+
+
   const user = useSelector((state) => state.session.user);
+
+  const cartOnClick = () => {
+    setCartStatus(cartStatus === 'hidden' ? 'visible' : 'hidden')
+  }
+
   return (
     <nav>
       <ul>
@@ -41,7 +48,7 @@ const NavBar = () => {
           <LogoutButton />
         </li>
         <li>
-          <i className="fas fa-shopping-cart"></i>
+          <i className="fas fa-shopping-cart" onClick={cartOnClick}></i>
           <div id="cart_count_background">
             <p id="cart_count">
               {

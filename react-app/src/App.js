@@ -12,6 +12,7 @@ import { authenticate } from './store/session';
 import IndividualProductPage from './components/individual_product_page';
 
 function App() {
+  const [cartStatus, setCartStatus] = useState('hidden')
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ function App() {
       if(!localStorage.currentCart) localStorage.setItem('currentCart', JSON.stringify({}))
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch, setCartStatus]);
 
 
   if (!loaded) {
@@ -30,8 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar/>
-
+      <NavBar cartStatus={cartStatus} setCartStatus={setCartStatus}/>
       <Switch>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
@@ -49,7 +49,7 @@ function App() {
           <IndividualProductPage/>
         </Route>
       </Switch>
-      <Shopping_Cart/>
+      <Shopping_Cart cartStatus={cartStatus}/>
     </BrowserRouter>
   );
 }

@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cart_Menu_Display from "./shopping_cart";
 import "./shopping_cart.css";
 
-const Shopping_Cart = () => {
+const Shopping_Cart = ({cartStatus}) => {
 
   return(<>
 
-    <Cart_Menu_Display />
+    <Cart_Menu_Display cartStatus={cartStatus}/>
   </>)
 };
 
