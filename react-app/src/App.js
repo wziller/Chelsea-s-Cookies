@@ -46,10 +46,10 @@ function App() {
           <MenuPage/>
         </Route>
         <Route path='/individualproduct/:productId' exact={true} >
-          <IndividualProductPage/>
+          <IndividualProductPage setCartStatus={setCartStatus}/>
         </Route>
       </Switch>
-      <Shopping_Cart cartStatus={cartStatus}/>
+      <Shopping_Cart setCartStatus={setCartStatus} cartStatus={cartStatus}/>
     </BrowserRouter>
   );
 }

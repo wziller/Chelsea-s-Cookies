@@ -4,7 +4,7 @@ import { getProductbyId, getProducts } from "../../store/product"
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
-const IndividualProductWindow = ({product}) => {
+const IndividualProductWindow = ({product, setCartStatus}) => {
     const dispatch = useDispatch()
     const [currentQuantity, setCurrentQuantity] = useState(0)
     const handlePlus = () =>{
@@ -19,6 +19,7 @@ const IndividualProductWindow = ({product}) => {
         const cart  = JSON.parse(localStorage.getItem('currentCart'))
         cart[product.id]? cart[product.id].quantity= cart[product.id].quantity += currentQuantity : cart[product.id]  = {'name': product.name, 'quantity':currentQuantity, 'price':product.price}
         localStorage.setItem('currentCart', JSON.stringify(cart))
+        setCartStatus('visible')
         setCurrentQuantity(0)
     }
     return(

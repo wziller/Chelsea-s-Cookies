@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./shopping_cart.css";
 
-const Cart_Menu_Display = ({cartStatus}) => {
+const Cart_Menu_Display = ({cartStatus, setCartStatus}) => {
     const [currentTotal, setCurrentTotal] =useState(0)
     let total = 0
 
@@ -11,7 +11,8 @@ const Cart_Menu_Display = ({cartStatus}) => {
     })}
     if(currentTotal !== total) setCurrentTotal(total)
 
-
+    useEffect(()=>{
+    },[setCartStatus, cartStatus])
 
     return cartStatus === 'visible' ? (
     <div>
@@ -26,6 +27,7 @@ const Cart_Menu_Display = ({cartStatus}) => {
         ))}
         <hr></hr>
         <li>{`Cart Total: $${currentTotal}`}</li>
+        <button>Review Cart</button>
       </ul>
 
     </div>

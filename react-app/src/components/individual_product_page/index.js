@@ -11,7 +11,7 @@ import IndividualProductReviews from "./individual_product_reviews"
 
 import { useEffect } from "react"
 
-const IndividualProductPage = () => {
+const IndividualProductPage = ({setCartStatus}) => {
     const dispatch = useDispatch()
     const {productId} = useParams()
 
@@ -34,7 +34,7 @@ const IndividualProductPage = () => {
 
     return selected_product?(
     <div className= "individual_product_container">
-        <IndividualProductWindow product={selected_product}/>
+        <IndividualProductWindow setCartStatus={setCartStatus} product={selected_product}/>
         <IndividualProductReviews product={selected_product}/>
     </div>
     ) : (

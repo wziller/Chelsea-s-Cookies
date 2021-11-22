@@ -25,6 +25,7 @@
 .cart_items{
     display: flex;
     justify-content: flex-start;
+    align-items: left;
 }
 
 #cart_count_background{
@@ -43,10 +44,6 @@
 
 }
 
-.cart_items{
-display: flex;
-justify-content: space-evenly;
-}
 .cart_items > p{
     margin:4px;
     }
