@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import NavBar from './components/navbar/NavBar';
+import Shopping_Cart from './components/shopping_cart';
 import Main from './components/main';
 import MenuPage from './components/menu';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -17,6 +18,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      if(!localStorage.currentCart) localStorage.setItem('currentCart', JSON.stringify({}))
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -28,7 +30,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar/>
+
       <Switch>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
@@ -46,6 +49,7 @@ function App() {
           <IndividualProductPage/>
         </Route>
       </Switch>
+      <Shopping_Cart/>
     </BrowserRouter>
   );
 }

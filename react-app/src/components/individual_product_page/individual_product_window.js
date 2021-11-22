@@ -14,6 +14,13 @@ const IndividualProductWindow = ({product}) => {
     const handleMinus = () =>{
       currentQuantity === 0 ? setCurrentQuantity(0) : setCurrentQuantity(currentQuantity - 1)
     }
+
+    const addToCart = () => {
+        const cart  = JSON.parse(localStorage.getItem('currentCart'))
+        cart[product.id]? cart[product.id].quantity= cart[product.id].quantity += currentQuantity : cart[product.id]  = {'name': product.name, 'quantity':currentQuantity, 'price':product.price}
+        localStorage.setItem('currentCart', JSON.stringify(cart))
+        setCurrentQuantity(0)
+    }
     return(
         <div id="individual_product_container">
             <div id="individual_product_window">
@@ -30,7 +37,7 @@ const IndividualProductWindow = ({product}) => {
                         <i className="fas fa-plus" onClick= {handlePlus}></i>
                     </div>
                     <p>{`Total: $${(product.price * currentQuantity)}`}</p>
-                    <button id= "individual_product_add_to_cart_btn">Add to Cart</button>
+                    <button id= "individual_product_add_to_cart_btn" onClick={addToCart}>Add to Cart</button>
                 </div>
             </div>
         </div>

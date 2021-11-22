@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../../store/session';
 import './LoginForm.css'
 
-const LoginForm = () => {
+const LoginForm = ({setShowModal}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +19,11 @@ const LoginForm = () => {
     }
   };
 
+  const loginDemoUser = () =>{
+    dispatch(login("demoUser@demo.com", 'password'))
+    setShowModal(false)
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -28,6 +33,7 @@ const LoginForm = () => {
   };
 
   if (user) {
+    setShowModal(false)
     return <Redirect to='/' />;
   }
 
@@ -58,6 +64,7 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <button onClick= {loginDemoUser}>Demo User</button>
       </div>
     </form>
   );
