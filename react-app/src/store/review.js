@@ -1,16 +1,16 @@
 
 const LOAD = "reviews/LOAD";
-const LOAD_ONE = "reviews/LOAD_ONE"
+const LOAD_ONE = "reviews/LOAD_ONE";
 const ADD_ONE = "reviews/ADD_ONE";
 
 const load = (payload) => ({
     type: LOAD,
-    payload,
+    payload
 });
 
 const addOneReview = (payload) => ({
   type: ADD_ONE,
-  payload,
+  payload
 });
 
 export const getReviews = () => async (dispatch) => {
@@ -40,6 +40,7 @@ export const getReviewbyId = (id) => async (dispatch) => {
 };
 
 export const createReview = (payload) => async (dispatch) => {
+
   const response = await fetch(`/api/reviews/`, {
     method: "POST",
     headers: {
@@ -49,9 +50,9 @@ export const createReview = (payload) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const newReview = await response.json();
-    dispatch(addOneReview(newReview));
-    return newReview;
+    const newOrder = await response.json();
+    dispatch(addOneReview(newOrder));
+    return newOrder;
   }
 };
 
@@ -83,18 +84,21 @@ export const editReview = (updatedReview) => async (dispatch) => {
   }
 };
 
-const initialState = [];
+const initialState = {};
 
 const reviewsReducer = (state = initialState, action) => {
   let newState;
-  let newReview;
+  let newOrder;
   switch (action.type) {
     case LOAD: {
        const reviews = action.payload['reviews']
       return {...state, reviews }
+    };
+    case ADD_ONE: {
+        return{...state, ...action.payload}
     }
     case LOAD_ONE: {
-    }
+    };
     default:
       return state;
   }

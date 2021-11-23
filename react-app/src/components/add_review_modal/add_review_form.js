@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import createReview from '../../store/review'
+import {createReview }from '../../store/review'
 import "./add_review_form.css";
 
 
@@ -20,7 +20,8 @@ const AddReviewForm = ({product}) => {
         setContent(e.target.value);
       };
 
-    const handleSubmit = () => {
+    const handleReviewSubmit = async(e) => {
+        e.preventDefault()
         const new_review = {
             user_id:user.id,
             product_id: product.id,
@@ -28,12 +29,13 @@ const AddReviewForm = ({product}) => {
             content:content
         }
 
-        dispatch(createReview(new_review))
+        console.log(new_review)
+        await dispatch(createReview(new_review))
 
     }
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleReviewSubmit}>
         <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
