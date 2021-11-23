@@ -1,25 +1,25 @@
-import "./edit_order_modal.css";
+import './cancel_order_form.css'
 
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import EditOrderForm from "./edit_order_form";
+import CancelOrderForm from "./cancel_order_form";
 import { Modal } from "../../context/Modal";
 
-function EditOrderModal({order}) {
+function DeleteOrderModal({order, setOrderCount, orderCount}) {
   const user = useSelector((state) => state.session.user);
   useEffect(() => {}, []);
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
-      <button onClick={() => setShowModal(true)}>Edit Order</button>
+      <button onClick={() => setShowModal(true)}>Cancel Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditOrderForm order={order}/>
+          <CancelOrderForm setOrderCount={setOrderCount} orderCount={orderCount} order={order} setShowModal={setShowModal}/>
         </Modal>
       )}
     </div>
   );
 }
 
-export default EditOrderModal;
+export default DeleteOrderModal;
