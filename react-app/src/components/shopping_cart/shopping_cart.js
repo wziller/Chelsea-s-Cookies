@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReviewCartModal from '../review_cart_modal'
 import "./shopping_cart.css";
 
 const Cart_Menu_Display = ({cartStatus, setCartStatus}) => {
@@ -27,7 +28,7 @@ const Cart_Menu_Display = ({cartStatus, setCartStatus}) => {
         ))}
         <hr></hr>
         <li>{`Cart Total: $${currentTotal}`}</li>
-        <button>Review Cart</button>
+        <ReviewCartModal/>
       </ul>
 
     </div>

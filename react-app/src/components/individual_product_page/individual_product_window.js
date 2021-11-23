@@ -17,7 +17,7 @@ const IndividualProductWindow = ({product, setCartStatus}) => {
 
     const addToCart = () => {
         const cart  = JSON.parse(localStorage.getItem('currentCart'))
-        cart[product.id]? cart[product.id].quantity= cart[product.id].quantity += currentQuantity : cart[product.id]  = {'name': product.name, 'quantity':currentQuantity, 'price':product.price}
+        cart[product.id]? cart[product.id].quantity= cart[product.id].quantity += currentQuantity : cart[product.id]  = {'id': product.id, 'name': product.name, 'quantity':currentQuantity, 'price':product.price}
         localStorage.setItem('currentCart', JSON.stringify(cart))
         setCartStatus('visible')
         setCurrentQuantity(0)
