@@ -31,7 +31,6 @@ export const geOrderbyId = (id) => async (dispatch) => {
 };
 
 export const createOrder = (payload) => async (dispatch) => {
-    console.log('delivery_address_payload================>', payload)
   const response = await fetch(`/api/orders/`, {
     method: "POST",
     headers: {
@@ -47,7 +46,7 @@ export const createOrder = (payload) => async (dispatch) => {
   }
 };
 
-export const deleteReview = (id) => async (dispatch) => {
+export const deleteOrder = (id) => async (dispatch) => {
   const response = await fetch(`/api/orders/delete/${id}`, {
     method: "DELETE",
   });
@@ -61,7 +60,7 @@ export const deleteReview = (id) => async (dispatch) => {
 export const editOrder = (updatedOrder) => async (dispatch) => {
 
   const order_id = updatedOrder.id;
-  const response = await fetch(`/api/reviews/edit/${order_id}`, {
+  const response = await fetch(`/api/orders/edit/${order_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -94,7 +93,7 @@ export const createOrderDetails = (payload) => async (dispatch) => {
 
 const initialState = [];
 
-const reviewsReducer = (state = initialState, action) => {
+const ordersReducer = (state = initialState, action) => {
   let newState;
   let newOrder;
   switch (action.type) {
@@ -111,4 +110,4 @@ const reviewsReducer = (state = initialState, action) => {
       return state;
   }
 };
-export default reviewsReducer;
+export default ordersReducer;

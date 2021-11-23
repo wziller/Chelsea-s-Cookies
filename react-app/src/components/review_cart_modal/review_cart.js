@@ -109,7 +109,6 @@ const ReviewCartWindow = () => {
   const updateDate = (e) => {
     setDate(e.target.value);
   };
-  console.log(cart)
   return ( Object.keys(cart).length !== 0 ? (
     <div>
       <div id="order_details">

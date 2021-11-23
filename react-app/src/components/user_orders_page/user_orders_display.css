@@ -1,0 +1,17 @@
+html,
+body{
+    display:flex;
+    justify-content: center;
+    width:100%;
+}
+
+#orders_display_window{
+    align-self: center;
+}
+
+.pending_orders_header,
+.accepted_orders_header,
+.completed_orders_header{
+    display:flex;
+    justify-content: space-evenly;
+}

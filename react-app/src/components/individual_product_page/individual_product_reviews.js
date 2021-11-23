@@ -8,7 +8,6 @@ const IndividualProductReviews = ({product}) => {
     const {users} = useSelector((state)=> state.users)
     const {reviews} = useSelector((state)=>state.reviews)
     const selected_product_reviews = reviews?.filter((review)=>review.product_id === product.id)
-        console.log(selected_product_reviews)
     const getReviewerUsername = (id) =>{
         const reviewer = users?.find(user=>user.id == id)
         return reviewer?.username
