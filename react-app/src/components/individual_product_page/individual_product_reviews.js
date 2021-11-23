@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getUsers } from "../../store/user"
+import AddReviewModal from "../add_review_modal/index"
 
 const IndividualProductReviews = ({product}) => {
     const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const IndividualProductReviews = ({product}) => {
 
 return(
 <div id= 'reviews_container'>
+    <AddReviewModal product={product}/>
     {selected_product_reviews?.map(review=>(
         <div key={review.id} className='review_card'>
             <div className='review_date_user'>

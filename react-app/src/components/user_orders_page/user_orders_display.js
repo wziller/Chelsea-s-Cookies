@@ -36,7 +36,7 @@ const UserOrdersDisplay = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
+  }, [setOrderCount, orderCount]);
 
   return products ? (
     <div id="orders_display_window">
