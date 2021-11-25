@@ -13,12 +13,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     phone = db.Column(db.String(40), nullable=False)
-    order_ids = db.relationship("Order", backref=db.backref('orders', lazy=True))
+    orders = db.relationship("Order", backref=db.backref('orders', lazy=True))
     reviews = db.relationship("Review", backref=db.backref('reviews', lazy=True))
     administrator = db.Column(db.Boolean(), nullable=False)
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
-    orders = []
 
     @property
     def password(self):
@@ -39,8 +38,8 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'phone': self.phone,
-            'orders': self.orders,
-            'reviews': self.reviews,
+            'orders': [order.to_dict() for order in self.orders],
+            'reviews': [review.to_dict() for review in self.reviews],
             'administrator': self.administrator,
             'created_on': self.created_on,
             'updated_on': self.updated_on

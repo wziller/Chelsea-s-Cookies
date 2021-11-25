@@ -9,9 +9,9 @@ fake = Faker()
 # Adds a demo user, you can add other users here if you want
 def seed_orders():
     statuses = ['requested', 'accepted', 'complete', 'delivered']
-    for _ in range(50):
+    for _ in range(100):
 
-        fake_user_id = randint(1,50)
+        fake_user_id = randint(1,101)
         fake_status = statuses[randint(0,2)]
         fake_delivery_date = fake.date()
         fake_delivery_address = fake.address()
@@ -24,7 +24,7 @@ def seed_orders():
             )
         db.session.add(new_Order)
 
-    
+
 
     db.session.commit()
 

@@ -2,6 +2,7 @@
 const LOAD = "orders/LOAD";
 const LOAD_ONE = "orders/LOAD_ONE"
 const ADD_ONE = "orders/ADD_ONE";
+const REMOVE_ONE = "orders/REMOVE_ONE";
 
 const load = (payload) => ({
     type: LOAD,
@@ -10,6 +11,11 @@ const load = (payload) => ({
 
 const addOneOrder = (payload) => ({
   type: ADD_ONE,
+  payload,
+});
+
+const removeOneOrder = (payload) => ({
+  type: REMOVE_ONE,
   payload,
 });
 
@@ -53,6 +59,7 @@ export const deleteOrder = (id) => async (dispatch) => {
 
   if (response.ok) {
     const deletedOrder = await response.json();
+    dispatch(removeOneOrder(deletedOrder));
     return deletedOrder;
   }
 };
@@ -105,6 +112,11 @@ const ordersReducer = (state = initialState, action) => {
         Object.assign({}, ...state)
     }
     case LOAD_ONE: {
+    }
+    case REMOVE_ONE: {
+      newState = Object.assign({}, ...state)
+      newState.session.user.orders = newState.session.user.orders.filter(order => order !== action.payload)
+      return newState
     }
     default:
       return state;

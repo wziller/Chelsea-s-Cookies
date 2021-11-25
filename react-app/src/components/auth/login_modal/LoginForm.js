@@ -19,8 +19,8 @@ const LoginForm = ({setShowModal}) => {
     }
   };
 
-  const loginDemoUser = () =>{
-    dispatch(login("demoUser@demo.com", 'password'))
+  const loginDemoUser = async () =>{
+    await dispatch(login("demoUser@demo.com", 'password'))
     setShowModal(false)
   }
 

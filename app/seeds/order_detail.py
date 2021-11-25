@@ -11,7 +11,7 @@ fake = Faker()
 # Adds a demo user, you can add other users here if you want
 def seed_order_details():
 
-    for num in range(50):
+    for num in range(100):
 
         fake_product_id = randint(1,50)
         fake_quantity = randint(1,10)
@@ -22,7 +22,7 @@ def seed_order_details():
             )
         db.session.add(new_Product)
 
-    for _ in range(50):
+    for _ in range(100):
         fake_product_id = randint(1,50)
         fake_quantity = randint(1,10)
         fake_order_id = randint(1,50)

@@ -20,8 +20,18 @@ def seed_users():
             administrator = False,
             )
         db.session.add(new_User)
-
-
+    demo_User = User(
+            firstName = 'demo',
+            lastName = 'user',
+            username = 'demoUser',
+            email = "demoUser@demo.com",
+            password='password',
+            phone = '1234567890',
+            orders = [],
+            reviews = [],
+            administrator = False,
+            )
+    db.session.add(demo_User)
     db.session.commit()
 
 

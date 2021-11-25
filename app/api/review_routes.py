@@ -20,8 +20,9 @@ def review(id):
     return review.to_dict()
 
 # POST a review
-@review_routes.route('/product/<int:id>', methods=['POST'])
-def review_post(id):
+@review_routes.route('/', methods=['POST'])
+
+def review_post():
   """
   Creates a new review
   """
@@ -32,9 +33,10 @@ def review_post(id):
 
 
   if form.validate_on_submit():
+    print(form.data)
     review = Review(
-      user_id=current_user.id,
-      product_id = id,
+      user_id=form.data['user_id'],
+      product_id = form.data['product_id'],
       content = form.data['content'],
       rating = form.data['rating'],
     )
@@ -65,7 +67,7 @@ def reviews_edit(id):
 
 @review_routes.route('/delete/<int:id>', methods=['DELETE'])
 def review_delete(id):
-  review = Review.query.filter(Review.id == id).first()
+  review = Review.query.get_or_404(id)
   try:
     db.session.delete(review)
     db.session.commit()

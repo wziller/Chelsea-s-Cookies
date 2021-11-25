@@ -41,7 +41,6 @@ export const login = (email, password) => async (dispatch) => {
     })
   });
 
-
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -55,6 +54,21 @@ export const login = (email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 
+}
+
+export const updateUser = (user_id) => async (dispatch) => {
+  const response = await fetch(`/api/users/${user_id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
+  if (response.ok) {
+    const updatedUser = await response.json();
+    dispatch(setUser(updatedUser))
+    return null;
+  } else {
+    return ['An error occurred. Please try again.']
+  }
 }
 
 export const logout = () => async (dispatch) => {

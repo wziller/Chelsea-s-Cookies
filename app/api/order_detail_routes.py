@@ -20,21 +20,21 @@ def order_detail(id):
     return order_detail.to_dict()
 
 # POST a order
-@order_details_routes.route('/order/<int:orderid>/product/<int:productid>', methods=['POST'])
-def custom_options_post(orderid, productid):
+@order_details_routes.route('/', methods=['POST'])
+def custom_options_post():
+
   """
   Creates a new custom order
   """
 
   form = OrderDetailsForm()
-
   form['csrf_token'].data = request.cookies['csrf_token']
 
 
   if form.validate_on_submit():
     order_details = Order_Detail(
-        order_id = orderid,
-        product_id = productid,
+        order_id = form.data['order_id'],
+        product_id = form.data['product_id'],
         quantity = form.data['quantity']
     )
     db.session.add(order_details)
@@ -63,6 +63,7 @@ def custom_options_edit(id):
 @order_details_routes.route('/delete/<int:id>', methods=['DELETE'])
 def options_delete(id):
   order_details = Order_Detail.query.filter(Order_Detail.id == id).first()
+  print('hit ================================>')
   try:
     db.session.delete(order_details)
     db.session.commit()

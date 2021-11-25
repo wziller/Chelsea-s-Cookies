@@ -20,8 +20,8 @@ def order(id):
     return order.to_dict()
 
 # POST a order
-@order_routes.route('/order/<int:id>', methods=['POST'])
-def order_post(id):
+@order_routes.route('/', methods=['POST'])
+def order_post():
   """
   Creates a new order
   """
@@ -66,7 +66,7 @@ def order_edit(id):
 
 @order_routes.route('/delete/<int:id>', methods=['DELETE'])
 def order_delete(id):
-  order = Order.query.filter(Order.id == id).first()
+  order = Order.query.get_or_404(id)
   try:
     db.session.delete(order)
     db.session.commit()

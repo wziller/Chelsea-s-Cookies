@@ -39,6 +39,7 @@
     npm start
 
 # setup heroku database
+    heroku run -a chelseas-cookies flask db downgrade
     heroku run -a chelseas-cookies flask db upgrade
     heroku run -a chelseas-cookies flask seed undo
     heroku run -a chelseas-cookies flask seed all

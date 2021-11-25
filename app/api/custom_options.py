@@ -20,7 +20,7 @@ def custom_option(id):
     return custom_option.to_dict()
 
 # POST a order
-@custom_options_routes.route('/order/<int:id>', methods=['POST'])
+@custom_options_routes.route('/custom_order/<int:id>', methods=['POST'])
 def custom_options_post(id):
   """
   Creates a new custom order
