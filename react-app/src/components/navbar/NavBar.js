@@ -41,9 +41,17 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
             <LoginModal />
           </li>
         )}
+        {console.log(user)}
         {!user && (
           <li>
             <SignUpModal />
+          </li>
+        )}
+        {user?.administrator === true && (
+          <li>
+            <NavLink to="/administrator" exact={true} activeClassName="active">
+              Administrator
+            </NavLink>
           </li>
         )}
         <li>About the Baker</li>

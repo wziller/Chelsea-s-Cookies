@@ -1,0 +1,27 @@
+#admin_user_display{
+    display:flex;
+    flex-direction: column;
+}
+
+#user_card,
+#orders_card
+{
+    width:500px;
+}
+
+.orders_hidden + div{
+    height: 0px;
+    width: 0px;
+    overflow: hidden;
+}
+
+
+
+.orders_visible + div{
+    height:fit-content;
+    width:500px;
+}
+
+.orders_visible > i {
+    transform: rotate(90deg);
+}

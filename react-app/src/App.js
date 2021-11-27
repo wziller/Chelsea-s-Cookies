@@ -6,6 +6,7 @@ import Shopping_Cart from './components/shopping_cart';
 import UserOptionsWindow from './components/user_options_menu/index'
 import Main from './components/main';
 import MenuPage from './components/menu';
+import AdministratorDisplay from './components/administrator_page/administrator_page';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -45,6 +46,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/user_orders/' exact={true} >
           <UserOrdersPage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/administrator' exact={true} >
+          <AdministratorDisplay />
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <Main/>

@@ -8,6 +8,11 @@ const load = (users) => ({
     users,
 });
 
+const load_one = (user) => ({
+  type: LOAD_ONE,
+    user,
+})
+
 const addOneUser = (payload) => ({
   type: ADD_ONE,
   payload,
@@ -24,9 +29,10 @@ export const getUsers = () => async (dispatch) => {
 export const getUserbyId = (id) => async (dispatch) => {
   const response = await fetch(`/api/users/${id}`);
   if (response.ok) {
-    const allUsersList = await response.json();
 
-    dispatch(load(allUsersList));
+    const allUsersList = await response.json();
+    console.log('response==============>', allUsersList)
+    dispatch(load_one(allUsersList));
   }
 };
 
@@ -67,6 +73,9 @@ const usersReducer = (state = initialState, action) => {
       return {...state, users }
     }
     case LOAD_ONE: {
+      console.log(action.users)
+       const users = [action.user]
+      return {...state, users }
     }
     default:
       return state;

@@ -1,0 +1,88 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getUserbyId, getUsers } from "../../store/user";
+import { useDispatch } from "react-redux";
+import { getProducts } from "../../store/product";
+
+import AdminUsersDisplay from "../admin_users/index";
+import AdminProductsDisplay from "../admin_products";
+import "./administrator_page.css";
+
+const AdministratorPage = () => {
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.users);
+  const { products } = useSelector((state) => state.products);
+
+  const menuClick = (e) => {
+    e.target.className =
+      e.target.className === "hidden_menu" ? "visible_menu" : "hidden_menu";
+  };
+
+  useEffect(() => {
+    dispatch(getUsers());
+    dispatch(getProducts());
+  }, []);
+  return (
+    <div id="admin_categories">
+
+      <div>
+        <div
+          id="user_menu_dropdown"
+          className="hidden_menu"
+          onClick={menuClick}
+        >
+          <h3>Users</h3>
+          <i className="fas fa-chevron-right"></i>
+        </div>
+        <div>
+          <AdminUsersDisplay id="users" />
+        </div>
+      </div>
+      <div>
+        <div id="orders_dropdown" className="hidden_menu" onClick={menuClick}>
+          <h3>Orders</h3>
+          <i className="fas fa-chevron-right"></i>
+        </div>
+        <div></div>
+      </div>
+      <div>
+        <div id="products_dropdown" className="hidden_menu" onClick={menuClick}>
+          <h3>Products</h3>
+          <i className="fas fa-chevron-right"></i>
+        </div>
+        <div>
+          <AdminProductsDisplay/>
+        </div>
+      </div>
+      <div>
+        <div id="gallery_dropdown" className="hidden_menu" onClick={menuClick}>
+          <h3>Gallery</h3>
+          <i className="fas fa-chevron-right"></i>
+        </div>
+        <div>
+
+        </div>
+      </div>
+      <div>
+      <div id="banner_dropdown" className="hidden_menu" onClick={menuClick}>
+        <h3>Banner</h3>
+        <i className="fas fa-chevron-right"></i>
+      </div>
+      <div>
+
+      </div>
+      </div>
+      <div>
+      <div id="reviews_dropdown" className="hidden_menu" onClick={menuClick}>
+        <h3>Reviews</h3>
+        <i className="fas fa-chevron-right"></i>
+      </div>
+      <div>
+
+      </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdministratorPage;
