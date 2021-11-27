@@ -5,13 +5,15 @@ import productsReducer from './product';
 import reviewsReducer from './review'
 import usersReducer from './user';
 import galleryReducer from './gallery'
+import { slidesReducer } from './slide';
 
 const rootReducer = combineReducers({
   session,
   products: productsReducer,
   reviews: reviewsReducer,
   users: usersReducer,
-  gallery_items: galleryReducer
+  gallery_items: galleryReducer,
+  slide_index: slidesReducer
 });
 
 

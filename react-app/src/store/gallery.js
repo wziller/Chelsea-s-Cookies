@@ -4,9 +4,10 @@ const LOAD_ONE = "gallery_items/LOAD_ONE"
 const ADD_ONE = "gallery_items/ADD_ONE";
 
 const load = (payload) => ({
-    type: LOAD,
-    payload,
+  type: LOAD,
+  payload
 });
+
 
 const addOneGalleryItem = (payload) => ({
   type: ADD_ONE,
@@ -79,10 +80,11 @@ const initialState = [];
 const galleryReducer = (state = initialState, action) => {
   let newState;
   let newGalleryItem;
+
   switch (action.type) {
     case LOAD: {
-       const products = action.payload['gallery_items']
-      return {...state, products }
+       const gallery_items = action.payload['gallery_items']
+      return {...state, gallery_items }
     }
     case LOAD_ONE: {
     }

@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#menu_carousel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width:80%;
+    position:relative;
+    transform:translateX(150px);
+}
