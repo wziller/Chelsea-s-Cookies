@@ -30,10 +30,10 @@
   outline: none;
 }
 .slides > button:first-child {
-  left: -50%;
+  left: -30%;
 }
 .slides > button:last-child {
-  right: -50%;
+  right: -30%;
 }
 
 .slideContent {
@@ -43,7 +43,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   transition: transform 0.5s ease-in-out;
-  opacity: 0.7;
+  opacity: 0.8;
   display: grid;
   align-content: center;
   transform-style: preserve-3d;
@@ -54,7 +54,7 @@
   transform-style: preserve-3d;
   transform: translateZ(2rem);
   transition: opacity 0.3s linear;
-  text-shadow: 0 0.1rem 1rem #000;
+  text-shadow: 0 0.1rem .4rem rgb(145, 152, 245);
   opacity: 0;
 }
 .slideContentInner .slideSubtitle,

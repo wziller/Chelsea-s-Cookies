@@ -17,12 +17,15 @@ const Gallery = () => {
         dispatch(getProducts())
     },[])
 
-    return products ?(
+    console.log(gallery_items)
+
+    return products && gallery_items ?(
         <div id='gallery_items_container'>
             <div id='menu_carousel'>
                 <Carousel slides={products}/>
             </div>
             <div id='custom_carousel'>
+                {/* <Carousel slides={gallery_items}/> */}
             </div>
         </div>
     ) : (<p>loading gallery</p>)
