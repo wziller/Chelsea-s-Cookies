@@ -7,12 +7,14 @@ import usersReducer from './user';
 import galleryReducer from './gallery'
 import { menuSlidesReducer } from './menu_slide';
 import { gallerySlidesReducer } from './gallery_slide';
+import ordersReducer from './order';
 
 const rootReducer = combineReducers({
   session,
   products: productsReducer,
   reviews: reviewsReducer,
   users: usersReducer,
+  user_orders:ordersReducer,
   gallery_items: galleryReducer,
   menu_slide_index: menuSlidesReducer,
   gallery_slide_index: gallerySlidesReducer

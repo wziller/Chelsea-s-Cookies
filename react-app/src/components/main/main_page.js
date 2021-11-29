@@ -4,9 +4,14 @@ import MainBanner from '../main_banner';
 import Gallery from '../gallery/gallery';
 import AboutTheBakerDisplay from '../about_the_baker';
 import FooterDisplay from '../footer';
+import { useEffect, useSelector } from 'react';
+import { getUsers } from '../../store/user';
+import { getProducts } from '../../store/product';
+import { getOrdersByUserId } from '../../store/order';
 
 
 const MainPage = () => {
+    
     return(
         <div>
             <MainBanner/>

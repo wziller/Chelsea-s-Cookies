@@ -2,6 +2,9 @@
 
 #orders_display_window{
     align-self: center;
+    width:60%;
+    height:100vh;
+
 }
 
 .pending_orders_header,

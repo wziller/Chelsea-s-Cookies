@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import { useEffect, useState, } from "react";
 import LoginModal from "../auth/login_modal";
 import "./review_cart.css";
-import { createOrder, createOrderDetails } from "../../store/order";
+import { createOrder, createOrderDetails, getOrdersByUserId } from "../../store/order";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { updateUser } from "../../store/session";
+import { getOrders } from "../../store/order";
 
 const ReviewCartWindow = ({setShowModal}) => {
   const history = useHistory()
@@ -65,7 +66,7 @@ const ReviewCartWindow = ({setShowModal}) => {
     e.preventDefault()
 
     const address_concat = `${address}, ${aptNumber} ${city}, ${state} ${zipCode}`
-
+    await dispatch(updateUser())
 
     const newOrder = {
       user_id: user.id,
@@ -76,6 +77,7 @@ const ReviewCartWindow = ({setShowModal}) => {
 
     const submitted_order = await dispatch(createOrder(newOrder))
 
+
     Object.values(cart).forEach(async(item)=>{
 
       const newOrderDetails ={
@@ -85,7 +87,7 @@ const ReviewCartWindow = ({setShowModal}) => {
       }
 
       await dispatch(createOrderDetails(newOrderDetails))
-      await dispatch(updateUser(user.id))
+      await dispatch(getOrdersByUserId(user.id))
       localStorage.setItem('currentCart', JSON.stringify({}))
       setShowModal(false)
       history.push('/individualproduct/user_orders')

@@ -27,6 +27,16 @@ export const getOrders = () => async (dispatch) => {
   }
 }
 
+export const getOrdersByUserId = (id) => async (dispatch) => {
+  const response = await fetch('/api/orders/')
+  if (response.ok) {
+    const allOrdersList = await response.json();
+    const userOrdersList = allOrdersList['orders'].filter(order=>order.user_id === id);
+    console.log("orderTest===============>",userOrdersList)
+    dispatch(load({userOrdersList}));
+  }
+}
+
 export const geOrderbyId = (id) => async (dispatch) => {
   const response = await fetch(`/api/orders/${id}`);
   if (response.ok) {
@@ -98,24 +108,25 @@ export const createOrderDetails = (payload) => async (dispatch) => {
     }
   };
 
-const initialState = [];
+const initialState = {};
 
 const ordersReducer = (state = initialState, action) => {
   let newState;
   let newOrder;
   switch (action.type) {
     case LOAD: {
-       const reviews = action.payload['reviews']
-      return {...state, reviews }
+       const orders = action.payload['orders']
+      return {...state, orders }
     }
     case ADD_ONE: {
-        Object.assign({}, ...state)
+
+      return {...state, ...action.payload}
     }
     case LOAD_ONE: {
     }
     case REMOVE_ONE: {
       newState = Object.assign({}, ...state)
-      newState.session.user.orders = newState.session.user.orders.filter(order => order !== action.payload)
+      newState.user_orders.orders = newState.user_orders.orders.filter(order => order !== action.payload)
       return newState
     }
     default:

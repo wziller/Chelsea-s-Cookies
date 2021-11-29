@@ -1,10 +1,6 @@
-/* TODO Add site wide styles */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  position: relative;
+#root{
+  width:100vw;
+  height:100vh;
 }
 
 html,
