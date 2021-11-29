@@ -29,7 +29,6 @@ const AddReviewForm = ({product, setShowModal}) => {
             content:content
         }
 
-        console.log(new_review)
         await dispatch(createReview(new_review))
         await dispatch(getReviews())
         setShowModal(false)

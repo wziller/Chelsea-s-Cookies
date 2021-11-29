@@ -60,8 +60,6 @@ const EditOrderForm = ({ order, setShowModal }) => {
   };
 
   const updateOrder = () => {
-    console.log('order.details_id', order.details_id)
-    console.log('currentItems', currentItems)
     order.details_id.forEach(async(detail)=>{
         await dispatch(deleteDetail(detail.id))
     })

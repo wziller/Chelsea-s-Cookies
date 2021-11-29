@@ -31,7 +31,6 @@ export const getUserbyId = (id) => async (dispatch) => {
   if (response.ok) {
 
     const allUsersList = await response.json();
-    console.log('response==============>', allUsersList)
     dispatch(load_one(allUsersList));
   }
 };
@@ -73,7 +72,6 @@ const usersReducer = (state = initialState, action) => {
       return {...state, users }
     }
     case LOAD_ONE: {
-      console.log(action.users)
        const users = [action.user]
       return {...state, users }
     }

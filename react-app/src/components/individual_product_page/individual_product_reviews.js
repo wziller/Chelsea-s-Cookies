@@ -33,6 +33,7 @@ const IndividualProductReviews = ({ product }) => {
               {getReviewerUsername(review.user_id)}
             </p>
             <p className="review_posted">{review.updated_on}</p>
+            {[...Array(review.rating)].map((e, i) => <img className='rating_star' src='https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/structure/star_rating_pink.png'></img>)}
           </div>
           <div>
             <p>{review.content}</p>

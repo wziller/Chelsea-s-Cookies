@@ -7,7 +7,6 @@ import { Modal } from "../../context/Modal";
 
 function DeleteOrderModal({order, setOrderCount, orderCount}) {
   const user = useSelector((state) => state.session.user);
-  useEffect(() => {}, []);
   const [showModal, setShowModal] = useState(false);
 
   return (

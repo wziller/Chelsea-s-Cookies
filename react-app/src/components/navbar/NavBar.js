@@ -28,12 +28,12 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
           {user && <i className="fas fa-user" onClick= {userOnClick}></i>}
         </li>
         <li>
-          <NavLink to="/" exact={true} activeClassName="active">
+          <NavLink to="/" exact={true} >
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/menu" exact={true} activeClassName="active">
+          <NavLink to="/menu" exact={true} >
             Menu
           </NavLink>
         </li>
@@ -42,7 +42,6 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
             <LoginModal />
           </li>
         )}
-        {console.log(user)}
         {!user && (
           <li>
             <SignUpModal />
@@ -50,12 +49,12 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
         )}
         {user?.administrator === true && (
           <li>
-            <NavLink to="/administrator" exact={true} activeClassName="active">
+            <NavLink to="/administrator" exact={true} >
               Administrator
             </NavLink>
           </li>
         )}
-        <li><Link to="/#bio_container" activeClassName="active">
+        <li><Link to="/#bio_container">
             About The Baker
           </Link></li>
         <li>Contact</li>

@@ -1,26 +1,24 @@
 import './cancel_order_form.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteOrder } from '../../store/order'
+import { deleteOrder, getOrdersByUserId } from '../../store/order'
 import { useEffect } from 'react'
 import { updateUser } from '../../store/session'
 
 const CancelOrderForm = ({order, setShowModal,setOrderCount, orderCount}) => {
     const dispatch=useDispatch()
     const user = useSelector(state=> state.session.user)
-    const deleteCurrentOrder = async() => {
-        await dispatch(deleteOrder(order.id))
-        await dispatch(updateUser(user.id))
+    const deleteCurrentOrder = () => {
+        dispatch(deleteOrder(order.id))
+        dispatch(updateUser(user.id))
         setShowModal(false)
         const newOrderCount = orderCount - 1
+        dispatch(getOrdersByUserId(user.id))
         setOrderCount(newOrderCount)
     }
 
     const handleCancel = () =>{
         setShowModal(false)
     }
-    useEffect(()=>{
-
-    },[])
     return(
 
 

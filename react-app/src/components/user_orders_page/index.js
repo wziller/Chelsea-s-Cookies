@@ -15,11 +15,6 @@ const UserOrdersPage = () => {
     const dispatch = useDispatch()
 
     const user = useSelector((state) => state.session.user);
-    // useEffect(()=>{
-    //     getUsers()
-    //     getProducts()
-    //     // getOrdersByUserId(user.id)
-    // },[])
     useEffect(() => {
         (async()=>{
             await dispatch(getProducts())

@@ -47,7 +47,6 @@ export const createDetail = (payload) => async (dispatch) => {
 };
 
 export const deleteDetail = (id) => async (dispatch) => {
-  console.log("hit++++++++++++++++++++++++++++>")
   const response = await fetch(`/api/order_details/delete/${id}`, {
     method: "DELETE",
   });

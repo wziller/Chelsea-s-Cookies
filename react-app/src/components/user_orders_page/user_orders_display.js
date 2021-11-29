@@ -10,15 +10,16 @@ import { updateUser } from "../../store/session";
 const UserOrdersDisplay = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const {orders} = useSelector((state)=>state.user_orders)
   const { products } = useSelector((state) => state.products);
-
-  const pendingOrders = user.orders.filter(
+console.log(orders)
+  const pendingOrders = orders?.filter(
     (order) => order.status === "requested"
   );
-  const acceptedOrders = user.orders.filter(
+  const acceptedOrders = orders?.filter(
     (order) => order.status === "accepted"
   );
-  const completedOrders = user.orders.filter(
+  const completedOrders = orders?.filter(
     (order) => order.status === "complete"
   );
 
@@ -45,15 +46,14 @@ const UserOrdersDisplay = () => {
   }, []);
 
   useEffect(() => {
-    console.log("UE DELETE HIT ===========================>");
   }, [deleteOrder]);
-  return products ? (
+  return pendingOrders ? (
     <div id="orders_display_window">
       <h1>{`${user.firstName}'s Orders`}</h1>
       {/* <h3>{`You have ${orderCount} current orders.`}</h3> */}
       <h2>Pending Orders</h2>
 
-      {pendingOrders.length === 0 && <h3>You have no accepted orders...</h3>}
+      {pendingOrders?.length === 0 && <h3>You have no accepted orders...</h3>}
       {pendingOrders &&
         pendingOrders.map((order) => (
           <div>

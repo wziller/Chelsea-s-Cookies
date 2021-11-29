@@ -18,8 +18,6 @@ const Gallery = () => {
         dispatch(getProducts())
     },[])
 
-    console.log(gallery_items)
-
     return products && gallery_items ?(
         <div id='gallery_items_container'>
             <div id='menu_carousel'>

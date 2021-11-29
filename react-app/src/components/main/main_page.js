@@ -19,6 +19,7 @@ const MainPage = () => {
     useEffect(()=>{
         dispatch(getProducts())
         dispatch(getReviews())
+        dispatch(getUsers())
        if(user) dispatch(getOrdersByUserId(user.id))
     },[])
 
