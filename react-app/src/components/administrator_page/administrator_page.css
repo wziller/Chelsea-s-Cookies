@@ -1,9 +1,10 @@
 #admin_categories{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    width:80%
+    width:100vw;
+    height:95vh;
 }
 
 #admin_categories > div{
@@ -11,7 +12,6 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    height:50%;
     width:80%;
     border-top: 2px solid grey;
     border-bottom: 2px solid grey;

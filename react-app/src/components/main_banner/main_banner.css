@@ -7,4 +7,9 @@
     background-position: 50%;
     background-size: cover;
     position:relative;
+    padding: 0px;
+}
+#main_banner_text{
+    padding:0px;
+    margin:0px;
 }

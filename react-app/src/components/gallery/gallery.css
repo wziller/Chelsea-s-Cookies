@@ -4,6 +4,7 @@
     align-items: center;
 }
 
+#custom_carousel,
 #menu_carousel{
     display: flex;
     justify-content: center;

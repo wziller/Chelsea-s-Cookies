@@ -5,6 +5,7 @@ import Shopping_Cart from "../shopping_cart";
 import LoginModal from "../auth/login_modal/index";
 import SignUpModal from "../auth/signup_modal/index";
 import LogoutButton from "../auth/LogoutButton";
+import { HashLink as Link } from 'react-router-hash-link';
 import "./NavBar.css";
 
 const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
@@ -54,7 +55,9 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
             </NavLink>
           </li>
         )}
-        <li>About the Baker</li>
+        <li><Link to="/#bio_container" activeClassName="active">
+            About The Baker
+          </Link></li>
         <li>Contact</li>
         <li>
           <i className="fas fa-shopping-cart" onClick={cartOnClick}></i>

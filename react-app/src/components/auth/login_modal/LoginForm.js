@@ -24,6 +24,11 @@ const LoginForm = ({setShowModal}) => {
     setShowModal(false)
   }
 
+  const loginDemoAdmin = async () =>{
+    await dispatch(login("demoAdmin@demo.com", 'password'))
+    setShowModal(false)
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -65,6 +70,7 @@ const LoginForm = ({setShowModal}) => {
         />
         <button type='submit'>Login</button>
         <button onClick= {loginDemoUser}>Demo User</button>
+        <button onClick= {loginDemoAdmin}>Demo Admin</button>
       </div>
     </form>
   );

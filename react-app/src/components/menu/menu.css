@@ -1,4 +1,5 @@
 :root {
+  width:100vw;
     --level-one: translateZ(3rem);
     --level-two: translateZ(6rem);
     --level-three: translateZ(9rem);

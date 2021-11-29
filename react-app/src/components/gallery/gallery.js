@@ -5,6 +5,7 @@ import { getProducts } from '../../store/product'
 import Deck from '../carousel/'
 import './gallery.css'
 import Carousel from "../carousel"
+import GalleryCarousel from "../gallery_carousel"
 
 
 const Gallery = () => {
@@ -25,7 +26,7 @@ const Gallery = () => {
                 <Carousel slides={products}/>
             </div>
             <div id='custom_carousel'>
-                {/* <Carousel slides={gallery_items}/> */}
+                <GalleryCarousel slides={gallery_items}/>
             </div>
         </div>
     ) : (<p>loading gallery</p>)

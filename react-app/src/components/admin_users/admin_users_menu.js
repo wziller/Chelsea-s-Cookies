@@ -13,7 +13,7 @@ const ordersClick = (e) => {
 
 const AdminUsersMenu = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
+  const {users} = useSelector((state)=>state.users)
   const { products } = useSelector((state) => state.products);
   const [searchedUser, setSearchedUser] = useState(users);
   const [filteredUsersList, setFilteredUsersList] = useState(users)
@@ -21,8 +21,6 @@ const AdminUsersMenu = () => {
   users?.forEach((user) => {
     user_names.push(`${user.firstName} ${user.lastName}`);
   });
-
-  console.log(user_names);
 
   const updateFilteredUsers = (suggestionsList) => {
     if(suggestionsList === []) setFilteredUsersList(users)
@@ -36,9 +34,9 @@ const AdminUsersMenu = () => {
   const updateSearchedUser = (acInput) => {
     setSearchedUser(acInput);
   };
-  useEffect(() => {}, []);
+  useEffect(() => {}, [updateFilteredUsers]);
 
-  useEffect(() => {getUsers()}, []);
+  useEffect(() => {getUsers()}, [dispatch]);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -48,7 +46,6 @@ const AdminUsersMenu = () => {
     const user = await users?.find(
       (user) => `${user.firstName} ${user.lastName}` === searchedUser
     );
-    console.log(user)
     user && dispatch(getUserbyId(user.id));
   }, [searchedUser]);
 

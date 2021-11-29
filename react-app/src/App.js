@@ -11,6 +11,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import UserOrdersPage from './components/user_orders_page';
+import FooterDisplay from './components/footer';
 import { authenticate } from './store/session';
 import IndividualProductPage from './components/individual_product_page';
 
@@ -60,6 +61,7 @@ function App() {
           <IndividualProductPage setCartStatus={setCartStatus}/>
         </Route>
       </Switch>
+      <FooterDisplay/>
       <Shopping_Cart setCartStatus={setCartStatus} cartStatus={cartStatus}/>
       {user && <UserOptionsWindow userStatus={userStatus} setUserStatus={setUserStatus}/>}
     </BrowserRouter>

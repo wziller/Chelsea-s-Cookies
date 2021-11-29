@@ -5,7 +5,8 @@ import productsReducer from './product';
 import reviewsReducer from './review'
 import usersReducer from './user';
 import galleryReducer from './gallery'
-import { slidesReducer } from './slide';
+import { menuSlidesReducer } from './menu_slide';
+import { gallerySlidesReducer } from './gallery_slide';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   reviews: reviewsReducer,
   users: usersReducer,
   gallery_items: galleryReducer,
-  slide_index: slidesReducer
+  menu_slide_index: menuSlidesReducer,
+  gallery_slide_index: gallerySlidesReducer
 });
 
 

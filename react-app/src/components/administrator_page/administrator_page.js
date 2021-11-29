@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserbyId, getUsers } from "../../store/user";
 import { useDispatch } from "react-redux";
@@ -12,16 +12,18 @@ const AdministratorPage = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users);
   const { products } = useSelector((state) => state.products);
+  const [filteredUsersList, setFilteredUsersList] = useState(users)
 
   const menuClick = (e) => {
     e.target.className =
       e.target.className === "hidden_menu" ? "visible_menu" : "hidden_menu";
+      dispatch(getUsers())
   };
-
+  useEffect(()=>{},[dispatch,getUsers, setFilteredUsersList])
   useEffect(() => {
     dispatch(getUsers());
     dispatch(getProducts());
-  }, []);
+  },[]);
   return (
     <div id="admin_categories">
 
@@ -35,7 +37,7 @@ const AdministratorPage = () => {
           <i className="fas fa-chevron-right"></i>
         </div>
         <div>
-          <AdminUsersDisplay id="users" />
+          <AdminUsersDisplay id="users" filteredUsersList={filteredUsersList} setFilteredUsersList={setFilteredUsersList} users={users} />
         </div>
       </div>
       <div>

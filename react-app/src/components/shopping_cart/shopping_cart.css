@@ -30,7 +30,7 @@
 
 #cart_count_background{
     position: absolute;
-    top: 30px;
+    top: 15px;
     right: 10px;
     display: flex;
     justify-content: center;
