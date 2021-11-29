@@ -9,7 +9,7 @@ gallery_routes = Blueprint('gallery_items', __name__)
 
 # GET all route
 @gallery_routes.route('/')
-def servers():
+def gallery_items():
     gallery_items = Gallery_Item.query.all()
     return {"gallery_items":[item.to_dict() for item in gallery_items]}
 

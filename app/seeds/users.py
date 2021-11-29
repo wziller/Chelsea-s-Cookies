@@ -32,6 +32,19 @@ def seed_users():
             administrator = False,
             )
     db.session.add(demo_User)
+
+    demo_Admin = User(
+            firstName = 'demo',
+            lastName = 'admin',
+            username = 'demoAdmin',
+            email = "demoAdmin@demo.com",
+            password='password',
+            phone = '1234567890',
+            orders = [],
+            reviews = [],
+            administrator = True,
+            )
+    db.session.add(demo_Admin)
     db.session.commit()
 
 
