@@ -95,7 +95,7 @@ const reviewsReducer = (state = initialState, action) => {
       return {...state, reviews }
     };
     case ADD_ONE: {
-        
+      return {...state, ...action.payload}
     }
     case LOAD_ONE: {
     };

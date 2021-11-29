@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {createReview, getReviews }from '../../store/review'
-import "./add_review_form.css";
+import {createReview, editReview, getReviews }from '../../store/review'
+import "./edit_review_form.css";
 
 
-const AddReviewForm = ({product, setShowModal}) => {
+const EditReviewForm = ({product, review, setShowModal}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const [errors, setErrors] = useState([]);
-    const [rating, setRating] = useState(5)
-    const [content, setContent] = useState('')
+    const [rating, setRating] = useState(review.rating)
+    const [content, setContent] = useState(review.content)
 
 
     const updateRating = (e) => {
@@ -23,14 +23,14 @@ const AddReviewForm = ({product, setShowModal}) => {
     const handleReviewSubmit = async(e) => {
         e.preventDefault()
         const new_review = {
+            id:review.id,
             user_id:user.id,
             product_id: product.id,
             rating:rating,
             content:content
         }
 
-        console.log(new_review)
-        await dispatch(createReview(new_review))
+        await dispatch(editReview(new_review))
         await dispatch(getReviews())
         setShowModal(false)
 
@@ -72,4 +72,4 @@ const AddReviewForm = ({product, setShowModal}) => {
   );
 };
 
-export default AddReviewForm
+export default EditReviewForm

@@ -32,7 +32,6 @@ export const getOrdersByUserId = (id) => async (dispatch) => {
   if (response.ok) {
     const allOrdersList = await response.json();
     const userOrdersList = allOrdersList['orders'].filter(order=>order.user_id === id);
-    console.log("orderTest===============>",userOrdersList)
     dispatch(load({userOrdersList}));
   }
 }

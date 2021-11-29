@@ -1,24 +1,24 @@
-import './add_review_form.css'
+import './edit_review_form.css'
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import AddReviewForm from "./add_review_form";
+import AddReviewForm from "./edit_review_form";
 import { Modal } from "../../context/Modal";
 
-function AddReviewModal({product}) {
+function EditReviewModal({product, review}) {
   const user = useSelector((state) => state.session.user);
   useEffect(() => {}, []);
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
-      <button onClick={() => setShowModal(true)}>Add a Review</button>
+      <button onClick={() => setShowModal(true)}>Edit Review</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <AddReviewForm product={product} setShowModal={setShowModal}/>
+          <AddReviewForm product={product} review={review} setShowModal={setShowModal}/>
         </Modal>
       )}
     </div>
   );
 }
 
-export default AddReviewModal;
+export default EditReviewModal;

@@ -4,6 +4,7 @@ import { createReview, getReviews } from "../../store/review";
 import DeleteCommentModal from "../delete_review_modal";
 import { getUsers } from "../../store/user";
 import AddReviewModal from "../add_review_modal/index";
+import EditReviewModal from "../edit_review_modal/index";
 
 const IndividualProductReviews = ({ product }) => {
   const user = useSelector((state) => state.session.user);
@@ -37,7 +38,7 @@ const IndividualProductReviews = ({ product }) => {
             <p>{review.content}</p>
           </div>
           <div>
-            {review.user_id === user.id && <button>edit</button>}
+            {review.user_id === user.id && <EditReviewModal product={product} review={review}/>}
             {review.user_id === user.id && <DeleteCommentModal review={review}/>}
           </div>
         </div>

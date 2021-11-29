@@ -4,7 +4,7 @@ import { useState } from "react";
 import { editOrder } from "../../store/order";
 import { deleteDetail, editDetail, createDetail } from "../../store/details";
 
-const EditOrderForm = ({ order }) => {
+const EditOrderForm = ({ order, setShowModal }) => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
@@ -73,6 +73,7 @@ const EditOrderForm = ({ order }) => {
     currentOrder.delivery_address = address
     currentOrder.delivery_date = date
     dispatch(editOrder(currentOrder));
+    setShowModal(false)
   };
 
   return (

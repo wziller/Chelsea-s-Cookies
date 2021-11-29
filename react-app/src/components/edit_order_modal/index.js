@@ -15,7 +15,7 @@ function EditOrderModal({order}) {
       <button onClick={() => setShowModal(true)}>Edit Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditOrderForm order={order}/>
+          <EditOrderForm order={order} setShowModal={setShowModal}/>
         </Modal>
       )}
     </div>
