@@ -8,10 +8,12 @@ import galleryReducer from './gallery'
 import { menuSlidesReducer } from './menu_slide';
 import { gallerySlidesReducer } from './gallery_slide';
 import ordersReducer from './order';
+import categoriesReducer from './category';
 
 const rootReducer = combineReducers({
   session,
   products: productsReducer,
+  categories:categoriesReducer,
   reviews: reviewsReducer,
   users: usersReducer,
   user_orders:ordersReducer,

@@ -1,11 +1,10 @@
-
 const LOAD = "products/LOAD";
-const LOAD_ONE = "products/LOAD_ONE"
+const LOAD_ONE = "products/LOAD_ONE";
 const ADD_ONE = "products/ADD_ONE";
 
 const load = (payload) => ({
-    type: LOAD,
-    payload,
+  type: LOAD,
+  payload,
 });
 
 const addOneProduct = (payload) => ({
@@ -14,12 +13,12 @@ const addOneProduct = (payload) => ({
 });
 
 export const getProducts = () => async (dispatch) => {
-  const response = await fetch('/api/products/')
+  const response = await fetch("/api/products/");
   if (response.ok) {
     const allProductsList = await response.json();
     dispatch(load(allProductsList));
   }
-}
+};
 
 export const getProductbyId = (id) => async (dispatch) => {
   const response = await fetch(`/api/products/${id}`);
@@ -31,7 +30,9 @@ export const getProductbyId = (id) => async (dispatch) => {
 };
 
 export const createProduct = (payload) => async (dispatch) => {
-  const response = await fetch(`/api/products/`, {
+  console.log(payload)
+
+  const response = await fetch('/api/products/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +59,6 @@ export const deleteProduct = (id) => async (dispatch) => {
 };
 
 export const editProduct = (updatedProduct) => async (dispatch) => {
-
   const product_id = updatedProduct.id;
   const response = await fetch(`/api/products/edit/${product_id}`, {
     method: "PUT",
@@ -70,7 +70,7 @@ export const editProduct = (updatedProduct) => async (dispatch) => {
   if (response.ok) {
     const newProduct = await response.json();
     dispatch(addOneProduct(newProduct));
-    return newProduct
+    return newProduct;
   }
 };
 
@@ -81,8 +81,8 @@ const productsReducer = (state = initialState, action) => {
   let newProduct;
   switch (action.type) {
     case LOAD: {
-       const products = action.payload['products']
-      return {...state, products }
+      const products = action.payload["products"];
+      return { ...state, products };
     }
     case LOAD_ONE: {
     }

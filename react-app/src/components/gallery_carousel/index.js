@@ -13,9 +13,8 @@ import './gallery_carousel.css'
     // const [state, dispatch] = useReducer(slidesReducer(slides));
 
     return (
-      <div className="slides">
+      <div className="gallery_slides">
         <button onClick={() => dispatch(prevGallerySlide(slides))}>‹</button>
-
         {[...slides, ...slides, ...slides].map((slide, i) => {
           let offset = slides.length + (gallerySlideIndex - i);
           return <Slide slide={slide} offset={offset} key={i} />;

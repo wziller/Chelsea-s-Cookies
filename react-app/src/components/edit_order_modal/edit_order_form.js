@@ -1,11 +1,12 @@
 import "./edit_order_modal.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { editOrder } from "../../store/order";
+import { editOrder, getOrdersByUserId } from "../../store/order";
 import { deleteDetail, editDetail, createDetail } from "../../store/details";
 
 const EditOrderForm = ({ order, setShowModal }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state)=>state.session.user)
   const { products } = useSelector((state) => state.products);
 
   const [errors, setErrors] = useState([]);
@@ -71,6 +72,7 @@ const EditOrderForm = ({ order, setShowModal }) => {
     currentOrder.delivery_address = address
     currentOrder.delivery_date = date
     dispatch(editOrder(currentOrder));
+    dispatch(getOrdersByUserId(user.id))
     setShowModal(false)
   };
 

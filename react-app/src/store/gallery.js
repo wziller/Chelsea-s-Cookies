@@ -1,13 +1,11 @@
-
 const LOAD = "gallery_items/LOAD";
-const LOAD_ONE = "gallery_items/LOAD_ONE"
+const LOAD_ONE = "gallery_items/LOAD_ONE";
 const ADD_ONE = "gallery_items/ADD_ONE";
 
 const load = (payload) => ({
   type: LOAD,
-  payload
+  payload,
 });
-
 
 const addOneGalleryItem = (payload) => ({
   type: ADD_ONE,
@@ -15,12 +13,12 @@ const addOneGalleryItem = (payload) => ({
 });
 
 export const getGalleryItems = () => async (dispatch) => {
-  const response = await fetch('/api/gallery/')
+  const response = await fetch("/api/gallery/");
   if (response.ok) {
     const allGalleryItemsList = await response.json();
     dispatch(load(allGalleryItemsList));
   }
-}
+};
 
 export const getGalleryItembyId = (id) => async (dispatch) => {
   const response = await fetch(`/api/gallery/${id}`);
@@ -48,7 +46,7 @@ export const createGalleryItem = (payload) => async (dispatch) => {
 };
 
 export const deleteGalleryItem = (id) => async (dispatch) => {
-  const response = await fetch(`/api/products/delete/${id}`, {
+  const response = await fetch(`/api/gallery/delete/${id}`, {
     method: "DELETE",
   });
 
@@ -59,7 +57,6 @@ export const deleteGalleryItem = (id) => async (dispatch) => {
 };
 
 export const editGalleryItem = (updatedGalleryItem) => async (dispatch) => {
-
   const gallery_item_id = updatedGalleryItem.id;
   const response = await fetch(`/api/gallery/edit/${gallery_item_id}`, {
     method: "PUT",
@@ -71,7 +68,7 @@ export const editGalleryItem = (updatedGalleryItem) => async (dispatch) => {
   if (response.ok) {
     const newGalleryItem = await response.json();
     dispatch(addOneGalleryItem(newGalleryItem));
-    return newGalleryItem
+    return newGalleryItem;
   }
 };
 
@@ -83,8 +80,8 @@ const galleryReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case LOAD: {
-       const gallery_items = action.payload['gallery_items']
-      return {...state, gallery_items }
+      const gallery_items = action.payload["gallery_items"];
+      return { ...state, gallery_items };
     }
     case LOAD_ONE: {
     }

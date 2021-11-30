@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, Flask, redirect, request
 from flask_login import login_required, current_user
 from app.forms.product_form import ProductForm
+from app.config import Config
+from app.aws_s3 import *
 from app.models import Product, db
 
 
@@ -20,26 +22,28 @@ def product(id):
     return product.to_dict()
 
 # POST a product
-@product_routes.route('/product/<int:id>', methods=['POST'])
-def product_post(id):
+@product_routes.route('/', methods=['POST'])
+def product_post():
   """
-  Creates a new product
+  Creates a new order
   """
 
   form = ProductForm()
 
   form['csrf_token'].data = request.cookies['csrf_token']
 
-
+  print(form.data)
   if form.validate_on_submit():
-    product = Product(
+    newMenuItem = Product(
       name=form.data['name'],
       description = form.data['description'],
       price = form.data['price'],
+      category = form.data['category'],
+      image_link= form.data['image_link']
     )
-    db.session.add(product)
+    db.session.add(newMenuItem)
     db.session.commit()
-    return product.to_dict()
+    return newMenuItem.to_dict()
   else:
     print(form.errors)
     return "Bad data"

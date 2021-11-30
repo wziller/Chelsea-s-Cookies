@@ -1,24 +1,21 @@
 @charset "UTF-8";
 
-
 .slides {
   display: grid;
+  position:relative;
 }
 .slides > .slide {
   grid-area: 1/-1;
 }
 .slides > button {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
   background: transparent;
+  position:absolute;
   border: none;
   color: rgb(248, 135, 248);
-  position: absolute;
   font-size: 5rem;
+  top:30%;
   width: 5rem;
   height: 5rem;
-  top: 30%;
   transition: opacity 0.3s;
   opacity: 0.7;
   z-index: 5;
@@ -43,7 +40,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   transition: transform 0.5s ease-in-out;
-  opacity: 0.8;
+  opacity: 0.3;
   display: grid;
   align-content: center;
   transform-style: preserve-3d;

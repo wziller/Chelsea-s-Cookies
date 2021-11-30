@@ -11,7 +11,7 @@ function Slide({ slide, offset }) {
     return (
       <div
         ref={ref}
-        className="slide"
+        className="gallery_slide"
         data-active={active}
         style={{
           "--offset": offset,
@@ -19,20 +19,20 @@ function Slide({ slide, offset }) {
         }}
       >
         <div
-          className="slideBackground"
+          className="gallery_slideBackground"
         //   style={{
         //     backgroundImage: `url('${slide.image_link}')`
         //   }}
         />
         <div
-          className="slideContent"
+          className="gallery_slideContent"
           style={{
             backgroundImage: `url('${slide.image}')`
           }}
         >
-          <div className="slideContentInner">
-            <h2 className="slideTitle">{products.find(product=>product.id === slide.product_id).name}</h2>
-            <h3 className="slideSubtitle">{slide.subtitle}</h3>
+          <div className="gallery_slideContentInner">
+            <h2 className="gallery_slideTitle">{products.find(product=>product.id === slide.product_id).name}</h2>
+            <h3 className="gallery_slideSubtitle">{slide.subtitle}</h3>
             {/* <p className="slideDescription">{slide.description}</p> */}
           </div>
         </div>

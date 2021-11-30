@@ -30,10 +30,9 @@ def review_post():
   form = ReviewForm()
 
   form['csrf_token'].data = request.cookies['csrf_token']
-
+  print(form.data)
 
   if form.validate_on_submit():
-    print(form.data)
     review = Review(
       user_id=form.data['user_id'],
       product_id = form.data['product_id'],

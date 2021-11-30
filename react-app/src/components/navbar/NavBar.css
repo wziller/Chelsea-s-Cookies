@@ -1,7 +1,11 @@
 nav{
     display:flex;
+    align-items: center;
 }
-
+#logo{
+    width:150px;
+    height:150px;
+}
 nav > ul {
     display: flex;
     justify-content: space-between;
@@ -10,10 +14,12 @@ nav > ul {
     padding-right: 15px ;
 }
 
-nav > li {
+li > a{
+    align-items: center;
 
 }
 
-.fa-shopping-cart{
+a {
+    font-size: 28pt;
 
 }

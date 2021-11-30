@@ -5,9 +5,9 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
-    description = db.Column(db.String(800), nullable=False)
+    description = db.Column(db.String(), nullable=False)
     price = db.Column(db.Integer(), nullable=False)
-    image_link = db.Column(db.String(300), nullable=False)
+    image_link = db.Column(db.String(), nullable=False)
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
     category = db.Column(db.Integer, db.ForeignKey('product_categories.id'), nullable=False)

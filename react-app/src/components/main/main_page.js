@@ -26,9 +26,9 @@ const MainPage = () => {
     return(
         <div>
             <MainBanner/>
-            <h2>See what I've been working on...</h2>
+            <h2 id='gallery_header'>See what I've been working on...</h2>
             <Gallery/>
-            <h2>About the baker...</h2>
+            <h2 id='bio_header'>About the baker...</h2>
             <AboutTheBakerDisplay/>
         </div>
     )

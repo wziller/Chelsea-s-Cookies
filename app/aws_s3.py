@@ -30,3 +30,5 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
 
 
     return f"{Config.S3_LOCATION}{file.filename}"
+
+

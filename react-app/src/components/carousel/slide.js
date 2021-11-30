@@ -1,40 +1,36 @@
 import useTilt from "./tilt";
-import './carousel.css'
+import "./carousel.css";
+import { HashLink as Link } from "react-router-hash-link";
 
 function Slide({ slide, offset }) {
-    const active = offset === 0 ? true : null;
-    const ref = useTilt(active);
+  const active = offset === 0 ? true : null;
+  const ref = useTilt(active);
 
-    return (
+  return (
+    <div
+      ref={ref}
+      className="slide"
+      data-active={active}
+      style={{
+        "--offset": offset,
+        "--dir": offset === 0 ? 0 : offset > 0 ? 1 : -1,
+      }}
+    >
       <div
-        ref={ref}
-        className="slide"
-        data-active={active}
+        className="slideContent"
         style={{
-          "--offset": offset,
-          "--dir": offset === 0 ? 0 : offset > 0 ? 1 : -1
+          backgroundImage: `url('${slide.image_link}')`,
         }}
       >
-        <div
-          className="slideBackground"
-        //   style={{
-        //     backgroundImage: `url('${slide.image_link}')`
-        //   }}
-        />
-        <div
-          className="slideContent"
-          style={{
-            backgroundImage: `url('${slide.image_link}')`
-          }}
-        >
-          <div className="slideContentInner">
-            <h2 className="slideTitle">{slide.name}</h2>
-            <h3 className="slideSubtitle">{slide.subtitle}</h3>
-            {/* <p className="slideDescription">{slide.description}</p> */}
-          </div>
+        <div className="slideContentInner">
+
+            <h2 className="slideTitle"><Link to={`/individualproduct/${slide.id}`}>{slide.name}</Link></h2>
+
+          <h3 className="slideSubtitle">{slide.subtitle}</h3>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  export default Slide
+export default Slide;

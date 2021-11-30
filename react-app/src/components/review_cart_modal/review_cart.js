@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { updateUser } from "../../store/session";
 import { getOrders } from "../../store/order";
+import { getProducts } from "../../store/product";
 
 const ReviewCartWindow = ({setShowModal}) => {
   const history = useHistory()
@@ -87,9 +88,11 @@ const ReviewCartWindow = ({setShowModal}) => {
       }
 
       await dispatch(createOrderDetails(newOrderDetails))
-      await dispatch(getOrdersByUserId(user.id))
+
       localStorage.setItem('currentCart', JSON.stringify({}))
       setShowModal(false)
+      await dispatch(getProducts())
+      await dispatch(getOrdersByUserId(user.id))
       history.push('/individualproduct/user_orders')
 
     })

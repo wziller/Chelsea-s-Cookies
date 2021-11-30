@@ -57,3 +57,13 @@ def gallery_item_edit(id):
   except:
     print(form.errors)
     return "Bad data"
+
+@gallery_routes.route('/delete/<int:id>', methods=['DELETE'])
+def gallery_item_delete(id):
+  gallery_item = Gallery_Item.query.get_or_404(id)
+  try:
+    db.session.delete(gallery_item)
+    db.session.commit()
+    return gallery_item.to_dict()
+  except:
+    return "No Server Found"

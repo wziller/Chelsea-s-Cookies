@@ -42,6 +42,9 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
             <LoginModal />
           </li>
         )}
+        <li>
+          <img id='logo' src='https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/structure/templogo.png'></img>
+        </li>
         {!user && (
           <li>
             <SignUpModal />
