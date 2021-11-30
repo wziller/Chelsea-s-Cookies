@@ -11,12 +11,12 @@
 }
 #main_banner_text{
     font-size: 60pt;
-    width:fit-content;
+    text-align: center;
+    width:100vw;
     position: absolute;
     padding:0px;
     margin:0px;
     right:0px;
     left: 0px;
-    transform: translateX(360px);
     color: cornflowerblue;
 }

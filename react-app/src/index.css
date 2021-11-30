@@ -3,6 +3,12 @@
   height: 100vh;
 }
 
+button{
+  font-size: 24pt;
+  background-color: transparent;
+  border:2px solid grey
+}
+
 html,
 body {
   display: flex;
