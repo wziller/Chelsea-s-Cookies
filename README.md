@@ -1,134 +1,39 @@
-# Flask React Project
+# Chelsea's Cookies
 
-This is the starter for the Flask React project.
+## Chelsea's Cookies at a Glance
 
-## Getting started
+Chelsea's Cookies is a full stack PERN app that allows users to purchase cookies from a local entrepreneur. Logged in users can purchase cookies from a standard menu set by the owner or custom cookies designed by the user. Users can also leave reviews about the products they have purchased and view a gallery of available cookies. Currently, Chelsea's Cookies is designed to have the owner arrange delivery independent of the website using the information available on the user's account.
 
-1. Clone this repository (only this branch)
+Application Architecture
+Chelsea's Cookies is built on a React frontend with Python/Flask backend, using PostgreSQL as a database.
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+Frontend Overview
+Chelsea's Cookies does the vast majority of its application logic on the backend, but display/interaction logic on the frontend is managed using several technologies.
 
-2. Install dependencies
+Frontend Technologies Used
+React
+Chelsea's Cookies is a React application. All display logic is handled by the React libraries.
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+Redux
+Chelesea's Cookies makes extensive use of Redux. All state management is handled with Redux, with thunks making API calls to the backend server for data.
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+Amazon Serverless Image Handler
+Amazon Serverless Image Handler is used to transform user product pictures into the sizes appropriate for display on Chelsea's Cookies, without having to worry about whether the image is being cropped correctly or not. This allows for users to be able to upload any image as a profile picture and ensuring that the relevant portion of the picture will be displayed on the site.
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+Backend Overview
+JamOut uses an Python/Flask server with a PostgreSQL database.
 
-   ```bash
-   pipenv shell
-   ```
+Backend Technologies Used
+Flask
+Flask was an easy choice to make for the Chelsea's Cookies server. The simple data flow from the frontend to the backend with JavaScript at the core of both made for quick, easy development, with little worry about the data types being sent and received.
 
-   ```bash
-   flask db upgrade
-   ```
+PostgreSQL
+PostgreSQL was the database of choice because it is simple to work with, and is easily manipulated using Sequelize.
 
-   ```bash
-   flask seed all
-   ```
+AWS S3
+Amazon Web Services S3 was used to allow users to upload image.
 
-   ```bash
-   flask run
-   ```
+Faker
+The Python faker library was used extensively to create users for JamOut.
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
-
-## Deploy to Heroku
-
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
-
-   ```bash
-   heroku login
-   ```
-
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
