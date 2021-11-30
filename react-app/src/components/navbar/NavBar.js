@@ -60,7 +60,7 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
         <li><Link to="/#bio_container">
             About The Baker
           </Link></li>
-        <li>Contact</li>
+        <li><Link to="/#contact_details">Contact</Link></li>
         <li>
           <i className="fas fa-shopping-cart" onClick={cartOnClick}></i>
           <div id="cart_count_background">

@@ -61,6 +61,7 @@ def gallery_item_edit(id):
 @gallery_routes.route('/delete/<int:id>', methods=['DELETE'])
 def gallery_item_delete(id):
   gallery_item = Gallery_Item.query.get_or_404(id)
+  print(gallery_item)
   try:
     db.session.delete(gallery_item)
     db.session.commit()

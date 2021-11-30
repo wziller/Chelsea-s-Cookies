@@ -10,6 +10,7 @@ import { getProducts } from '../../store/product';
 import { getOrdersByUserId } from '../../store/order';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReviews } from '../../store/review';
+import Contact from '../contact';
 
 
 const MainPage = () => {
@@ -30,6 +31,7 @@ const MainPage = () => {
             <Gallery/>
             <h2 id='bio_header'>About the baker...</h2>
             <AboutTheBakerDisplay/>
+            <Contact/>
         </div>
     )
 }

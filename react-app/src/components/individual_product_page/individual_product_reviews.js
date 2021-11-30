@@ -25,7 +25,7 @@ const IndividualProductReviews = ({ product }) => {
 
   return (
     <div id="reviews_container">
-      <AddReviewModal product={product} />
+      {user &&<AddReviewModal product={product} />}
       {selected_product_reviews?.map((review) => (
         <div key={review.id} className="review_card">
           <div className="review_date_user">
@@ -39,8 +39,8 @@ const IndividualProductReviews = ({ product }) => {
             <p>{review.content}</p>
           </div>
           <div>
-            {review.user_id === user.id && <EditReviewModal product={product} review={review}/>}
-            {review.user_id === user.id && <DeleteCommentModal review={review}/>}
+            {review.user_id === user?.id && <EditReviewModal product={product} review={review}/>}
+            {review.user_id === user?.id && <DeleteCommentModal review={review}/>}
           </div>
         </div>
       ))}

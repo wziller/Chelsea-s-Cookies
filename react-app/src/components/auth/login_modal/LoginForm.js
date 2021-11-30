@@ -21,12 +21,12 @@ const LoginForm = ({setShowModal}) => {
 
   const loginDemoUser = async () =>{
     await dispatch(login("demoUser@demo.com", 'password'))
-    setShowModal(false)
+    // setShowModal(false)
   }
 
   const loginDemoAdmin = async () =>{
     await dispatch(login("demoAdmin@demo.com", 'password'))
-    setShowModal(false)
+    // setShowModal(false)
   }
 
   const updateEmail = (e) => {

@@ -39,7 +39,8 @@ def product_post():
       description = form.data['description'],
       price = form.data['price'],
       category = form.data['category'],
-      image_link= form.data['image_link']
+      image_link= form.data['image_link'],
+      on_menu = form.data['on_menu']
     )
     db.session.add(newMenuItem)
     db.session.commit()
@@ -59,6 +60,8 @@ def product_edit(id):
     product_to_edit.name = form.data['name'],
     product_to_edit.description = form.data['description']
     product_to_edit.price = form.data['price']
+    product_to_edit.category = form.data['category']
+    product_to_edit.on_menu = form.data['on_menu']
   try:
     db.session.commit()
     return product_to_edit.to_dict()
@@ -67,11 +70,10 @@ def product_edit(id):
     return "Bad data"
 
 @product_routes.route('/delete/<int:id>', methods=['DELETE'])
-def product_delete(id):
-  product = Product.query.filter(Product.id == id).first()
-  try:
-    db.session.delete(product)
-    db.session.commit()
-    return product.to_dict()
-  except:
-    return "No Server Found"
+def review_delete(id):
+  print(id)
+  product = Product.query.get(id)
+  print(product)
+  db.session.delete(product)
+  db.session.commit()
+  return product.to_dict()

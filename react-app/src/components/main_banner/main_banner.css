@@ -10,6 +10,13 @@
     padding: 0px;
 }
 #main_banner_text{
+    font-size: 60pt;
+    width:fit-content;
+    position: absolute;
     padding:0px;
     margin:0px;
+    right:0px;
+    left: 0px;
+    transform: translateX(360px);
+    color: cornflowerblue;
 }

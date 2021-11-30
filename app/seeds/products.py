@@ -238,15 +238,17 @@ def fake_name_generator(adjectives, categories, category_id):
 def seed_products():
 
     for _ in range(50):
-        fake_description = fake.text(randint(100,800))
+        fake_description = fake.text(randint(100,250))
         fake_price = round(uniform(1.99,49.99), 2)
         category_id = randint(0,14)
+        fake_on_menu = ('false' if randint(0,1) == 0 else 'true')
         new_Product = Product(
             name = fake_name_generator(adjectives, categories, category_id),
             description = fake_description,
             price = fake_price,
             image_link = images[randint(0,24)],
-            category = category_id + 1
+            category = category_id + 1,
+            on_menu = fake_on_menu
             )
         db.session.add(new_Product)
 

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField
+from wtforms import StringField, TextAreaField, IntegerField, BooleanField
 from flask_wtf.file import FileField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Product
@@ -10,3 +10,4 @@ class ProductForm(FlaskForm):
   price = StringField('price', validators=[DataRequired()])
   image_link = StringField('image_link', validators=[DataRequired()])
   category = StringField('category', validators=[DataRequired()])
+  on_menu = StringField('on_menu', validators=[DataRequired()])

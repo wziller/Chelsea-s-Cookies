@@ -10,6 +10,7 @@ const AddMenuItemForm = ({ setShowModal }) => {
   const [itemPrice, setItemPrice] = useState("");
   const [itemCategory, setItemCategory] = useState('1');
   const [imageUrl, setImageUrl] = useState("");
+  const [itemOnMenu, setItemOnMenu] = useState('false')
   const [errors, setErrors] = useState([]);
 
   const updateItemName = (e) => {
@@ -40,6 +41,7 @@ const AddMenuItemForm = ({ setShowModal }) => {
       price: itemPrice,
       category:itemCategory,
       image_link: imageUrl,
+      on_menu:itemOnMenu
     };
     console.log(newMenuItem.category)
     dispatch(createProduct(newMenuItem));

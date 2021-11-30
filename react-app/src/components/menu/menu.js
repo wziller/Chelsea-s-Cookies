@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getProducts } from "../../store/product";
+import { getCurrentMenu, getProducts } from "../../store/product";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./menu.css";
@@ -10,20 +10,21 @@ const Menu = () => {
 
   useEffect(async () => {
     await dispatch(getProducts());
+    await dispatch(getCurrentMenu());
   }, []);
 
   useEffect(() => {}, [getProducts]);
 
-  const products = useSelector((state) => {
-    return state.products["products"];
+  const currentMenu = useSelector((state) => {
+    return state.products.current_menu;
   });
 
   const divStyle = (src) => ({
     backgroundImage: "url(" + src + ")",
   });
-  return products ? (
+  return currentMenu ? (
     <div className="products_container">
-      {products.map((product) => (
+      {currentMenu.map((product) => (
         <NavLink to={`/individualproduct/${product.id}`}>
           <div className="card">
             <div className="card_content">

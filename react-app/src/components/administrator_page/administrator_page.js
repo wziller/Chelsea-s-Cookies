@@ -52,13 +52,13 @@ const AdministratorPage = () => {
           />
         </div>
       </div>
-      <div>
+      {/* <div>
         <div id="orders_dropdown" className="hidden_menu" onClick={menuClick}>
           <h3>Orders</h3>
           <i className="fas fa-chevron-right"></i>
         </div>
         <div></div>
-      </div>
+      </div> */}
       <div>
         <div id="products_dropdown" className="hidden_menu" onClick={menuClick}>
           <h3>Products</h3>
@@ -79,20 +79,20 @@ const AdministratorPage = () => {
         </div>
         <div></div>
       </div>
-      <div>
-        <div id="banner_dropdown" className="hidden_menu" onClick={menuClick}>
+      {/* <div> */}
+        {/* <div id="banner_dropdown" className="hidden_menu" onClick={menuClick}>
           <h3>Banner</h3>
           <i className="fas fa-chevron-right"></i>
-        </div>
-        <div></div>
-      </div>
-      <div>
+        </div> */}
+        {/* <div></div>
+      </div> */}
+      {/* <div>
         <div id="reviews_dropdown" className="hidden_menu" onClick={menuClick}>
           <h3>Reviews</h3>
           <i className="fas fa-chevron-right"></i>
         </div>
         <div></div>
-      </div>
+      </div> */}
     </div>
   );
 };
