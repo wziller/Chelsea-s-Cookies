@@ -1,22 +1,21 @@
-
-.main_banner{
-    background-image: url('https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/Banners/Test-home-banner.jpg');
-    width:100vw;
-    height:650px;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: cover;
-    position:relative;
-    padding: 0px;
+.main_banner {
+  background-image: url("https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/Banners/Test-home-banner.jpg");
+  width: 100vw;
+  height: 650px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
+  position: relative;
+  padding: 0px;
 }
-#main_banner_text{
-    font-size: 60pt;
-    text-align: center;
-    width:100vw;
-    position: absolute;
-    padding:0px;
-    margin:0px;
-    right:0px;
-    left: 0px;
-    color: cornflowerblue;
+#main_banner_text {
+  font-size: 60pt;
+  text-align: center;
+  width: 100vw;
+  position: absolute;
+  padding: 0px;
+  margin: 0px;
+  right: 0px;
+  left: 0px;
+  color: cornflowerblue;
 }
