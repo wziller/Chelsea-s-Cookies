@@ -6,7 +6,7 @@ import AboutTheBakerDisplay from '../about_the_baker';
 import FooterDisplay from '../footer';
 import { useEffect } from 'react';
 import { getUsers } from '../../store/user';
-import { getProducts } from '../../store/product';
+import { getCurrentMenu, getProducts } from '../../store/product';
 import { getOrdersByUserId } from '../../store/order';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReviews } from '../../store/review';
@@ -21,6 +21,7 @@ const MainPage = () => {
         dispatch(getProducts())
         dispatch(getReviews())
         dispatch(getUsers())
+        dispatch(getCurrentMenu())
        if(user) dispatch(getOrdersByUserId(user.id))
     },[])
 
