@@ -2,7 +2,7 @@
 
 ## Chelsea's Cookies at a Glance
 
-Chelsea's Cookies is a full stack PERN app that allows users to purchase cookies from a local entrepreneur. Logged in users can purchase cookies from a standard menu set by the owner or custom cookies designed by the user. Users can also leave reviews about the products they have purchased and view a gallery of available cookies. Currently, Chelsea's Cookies is designed to have the owner arrange delivery independent of the website using the information available on the user's account.
+Chelsea's Cookies is a full stack app that allows users to purchase cookies from a local entrepreneur. Logged in users can purchase cookies from a standard menu set by the owner or custom cookies designed by the user. Users can also leave reviews about the products they have purchased and view a gallery of available cookies. Currently, Chelsea's Cookies is designed to have the owner arrange delivery independent of the website using the information available on the user's account.
 
 Application Architecture
 Chelsea's Cookies is built on a React frontend with Python/Flask backend, using PostgreSQL as a database.
