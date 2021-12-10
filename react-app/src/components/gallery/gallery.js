@@ -11,17 +11,17 @@ import GalleryCarousel from "../gallery_carousel"
 const Gallery = () => {
     const dispatch = useDispatch();
     const {gallery_items} = useSelector((state)=>state.gallery_items)
-    const {products} = useSelector((state)=> state.products)
+    const current_menu = useSelector((state)=> state.products.current_menu)
 
     useEffect(()=>{
         dispatch(getGalleryItems())
         dispatch(getProducts())
     },[])
 
-    return products && gallery_items ?(
+    return current_menu && gallery_items ?(
         <div id='gallery_items_container'>
             <div id='menu_carousel'>
-                <Carousel slides={products}/>
+                <Carousel slides={current_menu}/>
             </div>
             <div id='custom_carousel'>
                 <GalleryCarousel slides={gallery_items}/>

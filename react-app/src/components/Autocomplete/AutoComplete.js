@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./Autocomplete.css";
+
 const AutoComplete = ({ suggestions , placeholder, changeStateFunc, setFilteredList} ) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
-
   const [input, setInput] = useState("");
+  
   const onChange = async (e) => {
 
     const userInput = e.target.value;

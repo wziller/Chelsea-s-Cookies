@@ -5,7 +5,8 @@
 
 #user_card,
 #orders_card
-{
+{   margin: 10px;
+    border:2px solid grey;
     width:500px;
 }
 

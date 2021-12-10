@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState, } from "react";
+import ThankYouDisplay from "../thank_you_modal/thank_you_window";
 import LoginModal from "../auth/login_modal";
 import "./review_cart.css";
 import { createOrder, createOrderDetails, getOrdersByUserId } from "../../store/order";
@@ -14,6 +15,8 @@ const ReviewCartWindow = ({setShowModal}) => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const cart = JSON.parse(localStorage.getItem("currentCart"));
+
+
   const [errors, setErrors] = useState([]);
   const [address, setAddress] = useState("");
   const [aptNumber, setAptNumber] = useState("");
@@ -93,8 +96,10 @@ const ReviewCartWindow = ({setShowModal}) => {
       setShowModal(false)
       await dispatch(getProducts())
       await dispatch(getOrdersByUserId(user.id))
-      history.push('/individualproduct/user_orders')
-
+      // history.push('/')
+      return(
+        <ThankYouDisplay/>
+      )
     })
   }
 

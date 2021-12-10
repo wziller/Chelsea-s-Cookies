@@ -10,7 +10,7 @@ import { updateUser } from "../../store/session";
 const UserOrdersDisplay = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
-  const { orders } = useSelector((state) => state.user_orders);
+  const orders = useSelector((state) => state.orders.user_orders);
   const { products } = useSelector((state) => state.products);
   console.log(orders);
   const pendingOrders = orders?.filter((order) => order.status === "requested");

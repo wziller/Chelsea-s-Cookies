@@ -105,7 +105,6 @@ const AdminUsersMenu = () => {
                 </div>
               ))}
             </div>
-            <hr></hr>
           </div>
         ))}
       </div>

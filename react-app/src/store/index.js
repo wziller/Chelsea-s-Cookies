@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   categories:categoriesReducer,
   reviews: reviewsReducer,
   users: usersReducer,
-  user_orders:ordersReducer,
+  orders:ordersReducer,
   gallery_items: galleryReducer,
   menu_slide_index: menuSlidesReducer,
   gallery_slide_index: gallerySlidesReducer

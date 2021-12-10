@@ -1,12 +1,18 @@
 
 const LOAD = "orders/LOAD";
 const LOAD_ONE = "orders/LOAD_ONE"
+const LOAD_USER_ORDERS = "orders/LOAD_USER_ORDERS"
 const ADD_ONE = "orders/ADD_ONE";
 const REMOVE_ONE = "orders/REMOVE_ONE";
 
 const load = (payload) => ({
     type: LOAD,
     payload,
+});
+
+const loadUserOrders = (payload) => ({
+  type: LOAD_USER_ORDERS,
+  payload,
 });
 
 const addOneOrder = (payload) => ({
@@ -31,13 +37,12 @@ export const getOrdersByUserId = (id) => async (dispatch) => {
   const response = await fetch('/api/orders/')
   if (response.ok) {
     const allOrdersList = await response.json();
-    console.log(allOrdersList)
     const userOrdersList = allOrdersList['orders'].filter(order=>order.user_id === id);
-    dispatch(load(userOrdersList));
+    dispatch(loadUserOrders(userOrdersList));
   }
 }
 
-export const geOrderbyId = (id) => async (dispatch) => {
+export const getOrderbyId = (id) => async (dispatch) => {
   const response = await fetch(`/api/orders/${id}`);
   if (response.ok) {
     const order = await response.json();
@@ -108,32 +113,38 @@ export const createOrderDetails = (payload) => async (dispatch) => {
     }
   };
 
-const initialState = [];
+const initialState = {orders:[], user_orders:[]};
 
 const ordersReducer = (state = initialState, action) => {
   let newState;
   let newOrder;
   switch (action.type) {
     case LOAD: {
-       const orders = action.payload
-       console.log(orders)
+       const orders = action.payload.orders
       return {...state, orders }
     }
     case ADD_ONE: {
-
       return {...state, ...action.payload}
     }
     case LOAD_ONE: {
     }
+
+    case LOAD_USER_ORDERS:{
+      const user_orders = action.payload
+      return {...state, user_orders }
+    }
+
     case REMOVE_ONE: {
       newState=Object.assign({}, state)
-      const res = newState.orders?.filter(
+      console.log('store', newState.orders)
+      const orders = newState.orders.orders?.filter(
         (order) => order.id !== action.payload.id
       );
-      return res;
+      return {...state, orders};
     }
     default:
       return state;
   }
+
 };
 export default ordersReducer;
