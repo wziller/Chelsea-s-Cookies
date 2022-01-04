@@ -42,7 +42,7 @@ const UserOrdersDisplay = () => {
   }, []);
 
   useEffect(() => {}, [deleteOrder]);
-  return pendingOrders ? (
+  return orders ? (
     <div id="orders_container">
       <div id="orders_display_window">
         <h1>{`${user.firstName}'s Orders`}</h1>

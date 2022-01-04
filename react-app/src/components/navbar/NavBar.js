@@ -37,6 +37,11 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
             Menu
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/createCustomOrder" exact={true} >
+            Create Custom Order
+          </NavLink>
+        </li>
         {!user && (
           <li>
             <LoginModal />

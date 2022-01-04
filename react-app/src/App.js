@@ -14,6 +14,7 @@ import UserOrdersPage from './components/user_orders_page';
 import FooterDisplay from './components/footer';
 import { authenticate } from './store/session';
 import IndividualProductPage from './components/individual_product_page';
+import CustomOrderModal from './components/custom_order_modal';
 
 function App() {
   const [cartStatus, setCartStatus] = useState('hidden')
@@ -59,6 +60,9 @@ function App() {
         </Route>
         <Route path='/individualproduct/:productId' exact={true} >
           <IndividualProductPage setCartStatus={setCartStatus}/>
+        </Route>
+        <Route path='/createCustomOrder' exact={true} >
+          <CustomOrderModal/>
         </Route>
       </Switch>
       <FooterDisplay/>
