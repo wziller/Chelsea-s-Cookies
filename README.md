@@ -38,7 +38,7 @@ The Python faker library was used extensively to create users for JamOut.
 
 ## Features
 1. Main Page
-![Alt text](https://wziller-personal-portfolio.s3.us-east-2.amazonaws.com/project-images/cc-main-page-screenshot.PNG)
+![Alt text](https://wziller-personal-portfolio.s3.us-east-2.amazonaws.com/project-images/cc-individual-product-page-screenshot.PNG)
 The main page displays the current menu of offerings from the company as well as a gallery of custom creations by the baker.
 
 2. Administrator Back End
