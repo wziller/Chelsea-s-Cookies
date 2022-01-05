@@ -36,4 +36,17 @@ Amazon Web Services S3 was used to allow users to upload image.
 Faker
 The Python faker library was used extensively to create users for JamOut.
 
+## Features
+1. Main Page
+![Alt text](https://wziller-personal-portfolio.s3.us-east-2.amazonaws.com/project-images/cc-main-page-screenshot.PNG)
+The main page displays the current menu of offerings from the company as well as a gallery of custom creations by the baker.
+
+2. Administrator Back End
+![Alt text](https://wziller-personal-portfolio.s3.us-east-2.amazonaws.com/project-images/cc-admin-screenshot.PNG)
+The website features a page that utilizes dual authorization to only allow administrator access. This page allows the adiminstrator to manage orders, products, galleries and other content on the site without having to access the webssites code.
+
+3. Individual Product Page
+![Alt text](https://wziller-personal-portfolio.s3.us-east-2.amazonaws.com/project-images/cc-individual-product-page-screenshot.PNG)
+TThe individual product oage allows customerss to view product descriptions and pricing. It also allows users to review product they have purchased and view reviews by other customers.
+
 
