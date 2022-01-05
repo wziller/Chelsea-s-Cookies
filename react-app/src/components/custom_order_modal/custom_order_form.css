@@ -1,0 +1,21 @@
+.custom_radio{
+    display: flex;
+    height:10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.custom_radio_button{
+    width: fit-content;
+    height:fit-content;
+}
+
+.custom_options_select_buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.file_input_box{
+    width:80%;
+}

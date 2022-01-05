@@ -7,6 +7,7 @@ import SignUpModal from "../auth/signup_modal/index";
 import LogoutButton from "../auth/LogoutButton";
 import { HashLink as Link } from 'react-router-hash-link';
 import "./NavBar.css";
+import CustomOrderModal from "../custom_order_modal";
 
 const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
 
@@ -38,9 +39,7 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/createCustomOrder" exact={true} >
-            Create Custom Order
-          </NavLink>
+          <CustomOrderModal/>
         </li>
         {!user && (
           <li>

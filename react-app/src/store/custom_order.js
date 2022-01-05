@@ -1,7 +1,7 @@
 
 const LOAD = "orders/LOAD";
 const LOAD_ONE = "orders/LOAD_ONE"
-const LOAD_USER_CUSTOM_ORDERS = "orders/LOAD_USER_ORDERS"
+const LOAD_USER_CUSTOM_ORDERS = "orders/LOAD_USER_CUSTOM_ORDERS"
 const ADD_ONE = "orders/ADD_ONE";
 const REMOVE_ONE = "orders/REMOVE_ONE";
 
@@ -11,7 +11,7 @@ const load = (payload) => ({
 });
 
 const loadUserCustomOrders = (payload) => ({
-  type: LOAD_CUSTOM_USER_ORDERS,
+  type: LOAD_USER_CUSTOM_ORDERS,
   payload,
 });
 
@@ -38,7 +38,7 @@ export const getCustomOrdersByUserId = (id) => async (dispatch) => {
   if (response.ok) {
     const allCustomOrdersList = await response.json();
     const userCustomOrdersList = allCustomOrdersList['orders'].filter(order=>order.user_id === id);
-    dispatch(loadUserOrders(userCustomOrdersList));
+    dispatch(loadUserCustomOrders(userCustomOrdersList));
   }
 }
 
@@ -61,8 +61,8 @@ export const createCustomOrder = (payload) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const newOrder = await response.json();
-    dispatch(addOneCustomOrder(newOrder));
+    const newCustomOrder = await response.json();
+    dispatch(addOneCustomOrder(newCustomOrder));
     return newCustomOrder;
   }
 };
@@ -74,14 +74,14 @@ export const deleteCustomOrder = (id) => async (dispatch) => {
 
   if (response.ok) {
     const deletedCustomOrder = await response.json();
-    dispatch(removeOneCustomOrder(deletedOrder));
+    dispatch(removeOneCustomOrder(deletedCustomOrder));
     return deletedCustomOrder;
   }
 };
 
 export const editCustomOrder = (updatedCustomOrder) => async (dispatch) => {
 
-  const custom_order_id = updatedOrder.id;
+  const custom_order_id = updatedCustomOrder.id;
   const response = await fetch(`/api/customOrders/edit/${custom_order_id}`, {
     method: "PUT",
     headers: {
@@ -97,7 +97,7 @@ export const editCustomOrder = (updatedCustomOrder) => async (dispatch) => {
 };
 
 
-export const createCustomOrderOptions = (payload) => async (dispatch) => {
+export const createCustomOrderOption = (payload) => async (dispatch) => {
     const response = await fetch(`/api/custom_order_options/`, {
       method: "POST",
       headers: {
@@ -117,7 +117,7 @@ const initialState = {customOrders:[], user_custom_orders:[]};
 
 const customOrdersReducer = (state = initialState, action) => {
   let newState;
-  let newOrder;
+  let newCustomOrder;
   switch (action.type) {
     case LOAD: {
        const customOrders = action.payload.orders
@@ -129,7 +129,7 @@ const customOrdersReducer = (state = initialState, action) => {
     case LOAD_ONE: {
     }
 
-    case LOAD_USER_ORDERS:{
+    case LOAD_USER_CUSTOM_ORDERS:{
       const user_custom_orders = action.payload
       return {...state, user_custom_orders }
     }
@@ -137,7 +137,7 @@ const customOrdersReducer = (state = initialState, action) => {
     case REMOVE_ONE: {
       newState=Object.assign({}, state)
       const custom_orders = newState.custom_orders.orders?.filter(
-        (order) => custom_order.id !== action.payload.id
+        (custom_order) => custom_order.id !== action.payload.id
       );
       return {...state, custom_orders};
     }
