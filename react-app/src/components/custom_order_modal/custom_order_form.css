@@ -1,3 +1,8 @@
+button {
+    border:none;
+    color:pink;
+}
+
 .custom_radio{
     display: flex;
     height:10px;

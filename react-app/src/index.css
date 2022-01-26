@@ -28,3 +28,12 @@ body {
   background-color: white;
   width: 100vw;
 }
+a.active{
+  align-items: center;
+  text-decoration: none;
+  color: pink;
+}
+
+a {
+  color:pink;
+}

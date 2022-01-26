@@ -8,6 +8,7 @@ h2{
 
 p{
     font-size: 20pt;
+
 }
 
 a{
@@ -17,5 +18,5 @@ a{
 
 #bio_header,
 #gallery_header{
-    margin-left: 30px;
+    margin-left: 100px;
 }
