@@ -43,7 +43,6 @@ const AddMenuItemForm = ({ setShowModal }) => {
       image_link: imageUrl,
       on_menu:itemOnMenu
     };
-    console.log(newMenuItem.category)
     dispatch(createProduct(newMenuItem));
     dispatch(getProducts());
   };

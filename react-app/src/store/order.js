@@ -136,7 +136,6 @@ const ordersReducer = (state = initialState, action) => {
 
     case REMOVE_ONE: {
       newState=Object.assign({}, state)
-      console.log('store', newState.orders)
       const orders = newState.orders.orders?.filter(
         (order) => order.id !== action.payload.id
       );

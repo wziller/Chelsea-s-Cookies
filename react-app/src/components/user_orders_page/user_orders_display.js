@@ -12,7 +12,6 @@ const UserOrdersDisplay = () => {
   const user = useSelector((state) => state.session.user);
   const orders = useSelector((state) => state.orders.user_orders);
   const { products } = useSelector((state) => state.products);
-  console.log(orders);
   const pendingOrders = orders?.filter((order) => order.status === "requested");
   const acceptedOrders = orders?.filter((order) => order.status === "accepted");
   const completedOrders = orders?.filter(

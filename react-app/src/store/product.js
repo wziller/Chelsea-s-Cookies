@@ -36,7 +36,6 @@ export const getCurrentMenu = () => async (dispatch) => {
   const response = await fetch("/api/products/");
   if (response.ok) {
     const allProductsList = await response.json();
-    console.log(allProductsList)
     const current_menu = allProductsList.products.filter(product=> product.on_menu === 'true')
 
     dispatch(load_menu(current_menu));
@@ -53,7 +52,6 @@ export const getProductbyId = (id) => async (dispatch) => {
 };
 
 export const createProduct = (payload) => async (dispatch) => {
-  console.log(payload);
 
   const response = await fetch("/api/products/", {
     method: "POST",

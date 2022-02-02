@@ -29,9 +29,9 @@ const AdministratorPage = () => {
   if (!user.administrator) history.push("/");
 
   const menuClick = (e) => {
-    console.log(e.currentTarget.getAttribute("category"))
+
     setCurrentView(e.currentTarget.getAttribute("category"));
-    console.log(currentView)
+
   };
 
   useEffect(() => {}, [dispatch, getUsers, setFilteredUsersList,setCurrentView]);

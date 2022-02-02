@@ -81,8 +81,6 @@ const ReviewCartWindow = ({setShowModal}) => {
 
     const submitted_order = await dispatch(createOrder(newOrder))
 
-    console.log("items=============================>",Object.values(cart))
-
     Object.values(cart).forEach(async(item)=>{
 
       const newOrderDetails ={
