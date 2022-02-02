@@ -81,6 +81,7 @@ const ReviewCartWindow = ({setShowModal}) => {
 
     const submitted_order = await dispatch(createOrder(newOrder))
 
+    console.log("items=============================>",Object.values(cart))
 
     Object.values(cart).forEach(async(item)=>{
 
@@ -96,10 +97,10 @@ const ReviewCartWindow = ({setShowModal}) => {
       setShowModal(false)
       await dispatch(getProducts())
       await dispatch(getOrdersByUserId(user.id))
-      // history.push('/')
-      return(
-        <ThankYouDisplay/>
-      )
+      history.push('/')
+      // return(
+      //   <ThankYouDisplay/>
+      // )
     })
   }
 

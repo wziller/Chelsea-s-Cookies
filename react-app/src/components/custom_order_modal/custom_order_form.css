@@ -1,7 +1,4 @@
-button {
-    border:none;
-    color:pink;
-}
+
 
 .custom_radio{
     display: flex;
@@ -23,4 +20,9 @@ button {
 
 .file_input_box{
     width:80%;
+}
+
+.Nav_Button {
+    border:none;
+    color:pink;
 }

@@ -11,8 +11,8 @@ const MenuPage =()=>{
 
 
     return(
-        <div>
-            <h3>Menu</h3>
+        <div id="menu_page_container">
+            <h3 className="menu_title">Menu</h3>
             <Menu/>
         </div>
     )

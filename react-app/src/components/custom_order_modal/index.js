@@ -11,7 +11,7 @@ function CustomOrderModal({order, setOrderCount, orderCount}) {
 
   return (
     <div>
-      <button onClick={() => setShowModal(true)}>Create Custom Order</button>
+      <button className='Nav_Button' onClick={() => setShowModal(true)}>Create Custom Order</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CustomOrderForm/>

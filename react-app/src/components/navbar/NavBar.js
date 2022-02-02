@@ -26,7 +26,7 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
     <nav>
       <ul>
         <li>
-          {user && <i className="fas fa-user" onClick= {userOnClick}></i>}
+          {user && <i className="fas fa-user fa-2x" onClick= {userOnClick}></i>}
         </li>
         <li>
           <NavLink to="/" exact={true} >
@@ -38,9 +38,9 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
             Menu
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <CustomOrderModal/>
-        </li>
+        </li> */}
         {!user && (
           <li>
             <LoginModal />
@@ -66,7 +66,7 @@ const NavBar = ({cartStatus, setCartStatus, userStatus, setUserStatus}) => {
           </Link></li>
         <li><Link to="/#contact_details">Contact</Link></li>
         <li>
-          <i className="fas fa-shopping-cart" onClick={cartOnClick}></i>
+          <i className="fas fa-shopping-cart fa-2x" onClick={cartOnClick}></i>
           <div id="cart_count_background">
             <p id="cart_count">
               {
