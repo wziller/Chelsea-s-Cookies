@@ -1,30 +1,77 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState, } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import ThankYouDisplay from "../thank_you_modal/thank_you_window";
 import LoginModal from "../auth/login_modal";
 import "./review_cart.css";
-import { createOrder, createOrderDetails, getOrdersByUserId } from "../../store/order";
+import {
+  createOrder,
+  createOrderDetails,
+  getOrdersByUserId,
+} from "../../store/order";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { updateUser } from "../../store/session";
 import { getOrders } from "../../store/order";
 import { getProducts } from "../../store/product";
 
-const ReviewCartWindow = ({setShowModal}) => {
-  const history = useHistory()
-  const dispatch = useDispatch()
+const ReviewCartWindow = ({ setShowModal }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const cart = JSON.parse(localStorage.getItem("currentCart"));
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 3)
   const formik = useFormik({
-    initialValues:{
-      address:'',
-      aptNumber:'',
-      city:'',
-      state:'',
-      zipCode:'',
-      date:'',
-    }
+    initialValues: {
+      address: "",
+      aptNumber: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      date: "",
+    },
+    validationSchema: Yup.object({
+      address: Yup.string()
+        .max(100, "Must be 100 characters or less.")
+        .required("A delivery address is required."),
+      aptNumber: Yup.string().max(10, "Must be 10 characters or less."),
+      city: Yup.string().required("A city is required.").max(50, "Must be 50 characters or less."),
+      state: Yup.string().required("A state is required.").max(2, "Please use the two-letter abbreviation."),
+      zipCode: Yup.string().required("A Zip Code is required.").max(7, "Zip Code must be 7 numbers").min(7, "Zip Code must be 7 numbers"),
+      date: Yup.date().required("A delivery date is required.").min(tomorrow, "All orders must be placed at least 3 days in advance.")
+    }),
+    onSubmit: (values) => {
+      const address_concat = `${values.address}, ${values.aptNumber} ${values.city}, ${values.state} ${values.zipCode}`;
+      dispatch(updateUser());
+
+      const newOrder = {
+        user_id: user.id,
+        delivery_date: values.date,
+        delivery_address: address_concat,
+        status: "requested",
+      };
+
+      const submitted_order = dispatch(createOrder(newOrder));
+
+      Object.values(cart).forEach(async (item) => {
+        const newOrderDetails = {
+          order_id: submitted_order.id,
+          product_id: item.id,
+          quantity: item.quantity,
+        };
+
+        await dispatch(createOrderDetails(newOrderDetails));
+
+        localStorage.setItem("currentCart", JSON.stringify({}));
+        setShowModal(false);
+        await dispatch(getProducts());
+        await dispatch(getOrdersByUserId(user.id));
+        history.push("/");
+      });
+    },
   });
 
   const [errors, setErrors] = useState([]);
@@ -32,16 +79,15 @@ const ReviewCartWindow = ({setShowModal}) => {
     localStorage.getItem("currentCart", JSON.stringify(cart))
   );
 
-
   const calculateTotal = (shopping_cart) => {
-    let res = 0
+    let res = 0;
 
-    Object.values(shopping_cart).forEach(item => {
-      res += (item.price * item.quantity)
-    })
+    Object.values(shopping_cart).forEach((item) => {
+      res += item.price * item.quantity;
+    });
 
-    return res
-  }
+    return res;
+  };
 
   const [currentTotal, setCurrentTotal] = useState(calculateTotal(cart));
 
@@ -51,7 +97,7 @@ const ReviewCartWindow = ({setShowModal}) => {
       : (cart[item.id].quantity = cart[item.id].quantity + 1);
     localStorage.setItem("currentCart", JSON.stringify(cart));
     setCurrentCart(localStorage.getItem("currentCart", JSON.stringify(cart)));
-    setCurrentTotal(calculateTotal(cart))
+    setCurrentTotal(calculateTotal(cart));
   };
 
   const handleMinus = (item) => {
@@ -60,55 +106,19 @@ const ReviewCartWindow = ({setShowModal}) => {
       : (cart[item.id].quantity = cart[item.id].quantity - 1);
     localStorage.setItem("currentCart", JSON.stringify(cart));
     setCurrentCart(localStorage.getItem("currentCart", JSON.stringify(cart)));
-    setCurrentTotal(calculateTotal(cart))
+    setCurrentTotal(calculateTotal(cart));
   };
 
   const removeItem = (item) => {
     delete cart[item.id];
     localStorage.setItem("currentCart", JSON.stringify(cart));
     setCurrentCart(cart);
-    setCurrentTotal(calculateTotal(cart))
+    setCurrentTotal(calculateTotal(cart));
   };
-
-  const placeOrder = async (e) => {
-    e.preventDefault()
-
-    const address_concat = `${formik.values.address}, ${formik.values.aptNumber} ${formik.values.city}, ${formik.values.state} ${formik.values.zipCode}`
-    await dispatch(updateUser())
-
-    const newOrder = {
-      user_id: user.id,
-      delivery_date: formik.values.date,
-      delivery_address: address_concat,
-      status: 'requested'
-    }
-
-    const submitted_order = await dispatch(createOrder(newOrder))
-
-    Object.values(cart).forEach(async(item)=>{
-
-      const newOrderDetails ={
-        order_id:submitted_order.id,
-        product_id:item.id,
-        quantity:item.quantity
-      }
-
-      await dispatch(createOrderDetails(newOrderDetails))
-
-      localStorage.setItem('currentCart', JSON.stringify({}))
-      setShowModal(false)
-      await dispatch(getProducts())
-      await dispatch(getOrdersByUserId(user.id))
-      history.push('/')
-      // return(
-      //   <ThankYouDisplay/>
-      // )
-    })
-  }
 
   useEffect(() => {}, [setCurrentCart, handlePlus, handleMinus]);
 
-  return ( Object.keys(cart).length !== 0 ? (
+  return Object.keys(cart).length !== 0 ? (
     <div>
       <div id="order_details">
         <h3>Your Order:</h3>
@@ -135,7 +145,7 @@ const ReviewCartWindow = ({setShowModal}) => {
           <li>{`Phone: ${user.phone}`}</li>
         </ul>
       </div>
-      <form onSubmit={placeOrder}>
+      <form onSubmit={formik.handleSubmit}>
         <div>
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
@@ -147,54 +157,67 @@ const ReviewCartWindow = ({setShowModal}) => {
             type="text"
             name="address"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.address}
           ></input>
         </div>
+        {formik.touched.address && formik.errors.address ? <p className='cart_error'>{formik.errors.address}</p> : null}
         <div>
           <input
             placeholder="apt number"
             type="text"
             name="aptNumber"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.aptNumber}
           ></input>
         </div>
+        {formik.touched.aptNumber && formik.errors.aptNumber ? <p className='cart_error'>{formik.errors.aptNumber}</p> : null}
         <div>
           <input
             placeholder="city"
             type="text"
             name="city"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.city}
           ></input>
         </div>
+        {formik.touched.city && formik.errors.city ? <p className='cart_error'>{formik.errors.city}</p> : null}
         <div>
           <input
             placeholder="state"
             type="text"
             name="state"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.state}
           ></input>
         </div>
+        {formik.touched.state && formik.errors.state ? <p className='cart_error'>{formik.errors.state}</p> : null}
         <div>
           <input
             placeholder="ZIP Code"
             type="text"
             name="zipCode"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.zipCode}
           ></input>
         </div>
+        {formik.touched.email && formik.errors.email ? <p className='cart_error'>{formik.errors.zipCode}</p> : null}
+        <gap></gap>
         <div>
           <input
             placeholder="delivery date"
             type="date"
             name="date"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.date}
           ></input>
         </div>
+        {formik.touched.date && formik.errors.date ? <p className='cart_error'>{formik.errors.date}</p> : null}
         <button type="submit">Checkout</button>
       </form>
     </div>
@@ -203,7 +226,7 @@ const ReviewCartWindow = ({setShowModal}) => {
       <h3>Your Cart is Empty...</h3>
       <img src="https://wziller-chelseas-cookies.s3.us-east-2.amazonaws.com/sad-cookie.png"></img>
     </>
-  ));
+  );
 };
 
 export default ReviewCartWindow;
