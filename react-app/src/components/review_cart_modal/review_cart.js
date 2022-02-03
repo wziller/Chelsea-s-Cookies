@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState, } from "react";
+import { useFormik } from "formik";
 import ThankYouDisplay from "../thank_you_modal/thank_you_window";
 import LoginModal from "../auth/login_modal";
 import "./review_cart.css";
@@ -15,15 +16,18 @@ const ReviewCartWindow = ({setShowModal}) => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const cart = JSON.parse(localStorage.getItem("currentCart"));
-
+  const formik = useFormik({
+    initialValues:{
+      address:'',
+      aptNumber:'',
+      city:'',
+      state:'',
+      zipCode:'',
+      date:'',
+    }
+  });
 
   const [errors, setErrors] = useState([]);
-  const [address, setAddress] = useState("");
-  const [aptNumber, setAptNumber] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("")
-  const [date, setDate] = useState("");
   const [currentCart, setCurrentCart] = useState(
     localStorage.getItem("currentCart", JSON.stringify(cart))
   );
@@ -69,12 +73,12 @@ const ReviewCartWindow = ({setShowModal}) => {
   const placeOrder = async (e) => {
     e.preventDefault()
 
-    const address_concat = `${address}, ${aptNumber} ${city}, ${state} ${zipCode}`
+    const address_concat = `${formik.values.address}, ${formik.values.aptNumber} ${formik.values.city}, ${formik.values.state} ${formik.values.zipCode}`
     await dispatch(updateUser())
 
     const newOrder = {
       user_id: user.id,
-      delivery_date: date,
+      delivery_date: formik.values.date,
       delivery_address: address_concat,
       status: 'requested'
     }
@@ -104,29 +108,6 @@ const ReviewCartWindow = ({setShowModal}) => {
 
   useEffect(() => {}, [setCurrentCart, handlePlus, handleMinus]);
 
-  const updateAddress = (e) => {
-    setAddress(e.target.value);
-  };
-
-  const updateAptNumber = (e) => {
-    setAptNumber(e.target.value);
-  };
-
-  const updateCity = (e) => {
-    setCity(e.target.value);
-  };
-
-  const updateState = (e) => {
-    setState(e.target.value);
-  };
-
-  const updateZipCode = (e) => {
-    setZipCode(e.target.value);
-  };
-
-  const updateDate = (e) => {
-    setDate(e.target.value);
-  };
   return ( Object.keys(cart).length !== 0 ? (
     <div>
       <div id="order_details">
@@ -164,18 +145,18 @@ const ReviewCartWindow = ({setShowModal}) => {
           <input
             placeholder="delivery address"
             type="text"
-            name="delivery address"
-            onChange={updateAddress}
-            value={address}
+            name="address"
+            onChange={formik.handleChange}
+            value={formik.values.address}
           ></input>
         </div>
         <div>
           <input
             placeholder="apt number"
             type="text"
-            name="apt number"
-            onChange={updateAptNumber}
-            value={aptNumber}
+            name="aptNumber"
+            onChange={formik.handleChange}
+            value={formik.values.aptNumber}
           ></input>
         </div>
         <div>
@@ -183,8 +164,8 @@ const ReviewCartWindow = ({setShowModal}) => {
             placeholder="city"
             type="text"
             name="city"
-            onChange={updateCity}
-            value={city}
+            onChange={formik.handleChange}
+            value={formik.values.city}
           ></input>
         </div>
         <div>
@@ -192,26 +173,26 @@ const ReviewCartWindow = ({setShowModal}) => {
             placeholder="state"
             type="text"
             name="state"
-            onChange={updateState}
-            value={state}
+            onChange={formik.handleChange}
+            value={formik.values.state}
           ></input>
         </div>
         <div>
           <input
             placeholder="ZIP Code"
             type="text"
-            name="zip code"
-            onChange={updateZipCode}
-            value={zipCode}
+            name="zipCode"
+            onChange={formik.handleChange}
+            value={formik.values.zipCode}
           ></input>
         </div>
         <div>
           <input
             placeholder="delivery date"
             type="date"
-            name="delivery date"
-            onChange={updateDate}
-            value={date}
+            name="date"
+            onChange={formik.handleChange}
+            value={formik.values.date}
           ></input>
         </div>
         <button type="submit">Checkout</button>

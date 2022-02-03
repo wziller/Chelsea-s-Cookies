@@ -43,13 +43,12 @@ const LoginForm = ({setShowModal}) => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form id='login_form' onSubmit={onLogin}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
         <label htmlFor='email'></label>
         <input
           name='email'
@@ -58,8 +57,6 @@ const LoginForm = ({setShowModal}) => {
           value={email}
           onChange={updateEmail}
         />
-      </div>
-      <div>
         <label htmlFor='password'></label>
         <input
           name='password'
@@ -68,10 +65,11 @@ const LoginForm = ({setShowModal}) => {
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
-        <button onClick= {loginDemoUser}>Demo User</button>
-        <button onClick= {loginDemoAdmin}>Demo Admin</button>
-      </div>
+        <div id='login_buttons_container'>
+          <button type='submit'>Login</button>
+          <button onClick= {loginDemoUser}>Demo User</button>
+          <button onClick= {loginDemoAdmin}>Demo Admin</button>
+        </div>
     </form>
   );
 };

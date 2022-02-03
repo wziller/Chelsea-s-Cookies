@@ -31,9 +31,9 @@ body {
 a.active{
   align-items: center;
   text-decoration: none;
-  color: pink;
+  color: rgb(253, 160, 175);
 }
 
 a {
-  color:pink;
+  color:rgb(253, 160, 175);
 }
