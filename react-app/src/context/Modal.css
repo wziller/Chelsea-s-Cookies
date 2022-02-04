@@ -29,4 +29,9 @@
     border-radius: 10px;
     box-shadow:5px 5px rgba(10, 10, 10, 0.2);
     padding:20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
   }
