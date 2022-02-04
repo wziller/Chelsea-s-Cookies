@@ -21,3 +21,13 @@ input{
     background-color: rgb(253, 160, 175);
     border-radius: 15px;
 };
+
+#modal-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color:rgb(156, 235, 205);
+    border-radius: 10px;
+    box-shadow:5px 5px rgba(10, 10, 10, 0.2);
+    padding:20px;
+  }
