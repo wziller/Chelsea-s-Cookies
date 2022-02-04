@@ -26,7 +26,7 @@ const MainPage = () => {
     },[])
 
     return(
-        <div>
+        <div id='mainpage'>
             <MainBanner/>
             <h2 id='gallery_header'>See what I've been working on...</h2>
             <Gallery/>
