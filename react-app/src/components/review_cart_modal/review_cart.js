@@ -74,7 +74,7 @@ const ReviewCartWindow = ({ setShowModal }) => {
         .min(tomorrow, "All orders must be placed at least 3 days in advance.")
         .required("A delivery date is required."),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const address_concat = `${values.address}, ${values.aptNumber} ${values.city}, ${values.state} ${values.zipCode}`;
       dispatch(updateUser());
 
@@ -85,17 +85,17 @@ const ReviewCartWindow = ({ setShowModal }) => {
         status: "requested",
       };
 
-      const submitted_order = dispatch(createOrder(newOrder));
-
+      const submitted_order = await dispatch(createOrder(newOrder));
+      
       Object.values(cart).forEach(async (item) => {
         const newOrderDetails = {
           order_id: submitted_order.id,
           product_id: item.id,
           quantity: item.quantity,
         };
-
         dispatch(createOrderDetails(newOrderDetails));
       });
+
         localStorage.setItem("currentCart", JSON.stringify({}));
         setShowModal(false);
         dispatch(getProducts());

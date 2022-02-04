@@ -98,6 +98,7 @@ export const editOrder = (updatedOrder) => async (dispatch) => {
 
 
 export const createOrderDetails = (payload) => async (dispatch) => {
+
     const response = await fetch(`/api/order_details/`, {
       method: "POST",
       headers: {
@@ -105,7 +106,7 @@ export const createOrderDetails = (payload) => async (dispatch) => {
       },
       body: JSON.stringify(payload),
     });
-
+   
     if (response.ok) {
       const newOrder = await response.json();
       dispatch(addOneOrder(newOrder));
