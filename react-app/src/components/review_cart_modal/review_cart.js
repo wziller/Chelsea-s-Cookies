@@ -21,9 +21,30 @@ const ReviewCartWindow = ({ setShowModal }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const cart = JSON.parse(localStorage.getItem("currentCart"));
-  const today = new Date()
-  const tomorrow = new Date(today)
-  tomorrow.setDate(tomorrow.getDate() + 3)
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 3);
+
+  const orderSchema = Yup.object().shape({
+    address: Yup.string()
+      .max(100, "Must be 100 characters or less.")
+      .required("A delivery address is required."),
+    aptNumber: Yup.string().max(10, "Must be 10 characters or less."),
+    city: Yup.string()
+      .max(50, "Must be 50 characters or less.")
+      .required("A city is required."),
+    state: Yup.string()
+      .max(2, "Please use the two-letter abbreviation.")
+      .required("A state is required."),
+    zipCode: Yup.string()
+      .max(7, "Zip Code must be 7 numbers")
+      .min(7, "Zip Code must be 7 numbers")
+      .required("A Zip Code is required."),
+    date: Yup.date()
+      .min(tomorrow, "All orders must be placed at least 3 days in advance.")
+      .required("A delivery date is required."),
+  });
+
   const formik = useFormik({
     initialValues: {
       address: "",
@@ -33,15 +54,25 @@ const ReviewCartWindow = ({ setShowModal }) => {
       zipCode: "",
       date: "",
     },
-    validationSchema: Yup.object({
+
+    validationSchema: Yup.object().shape({
       address: Yup.string()
         .max(100, "Must be 100 characters or less.")
         .required("A delivery address is required."),
       aptNumber: Yup.string().max(10, "Must be 10 characters or less."),
-      city: Yup.string().required("A city is required.").max(50, "Must be 50 characters or less."),
-      state: Yup.string().required("A state is required.").max(2, "Please use the two-letter abbreviation."),
-      zipCode: Yup.string().required("A Zip Code is required.").max(7, "Zip Code must be 7 numbers").min(7, "Zip Code must be 7 numbers"),
-      date: Yup.date().required("A delivery date is required.").min(tomorrow, "All orders must be placed at least 3 days in advance.")
+      city: Yup.string()
+        .max(50, "Must be 50 characters or less.")
+        .required("A city is required."),
+      state: Yup.string()
+        .max(2, "Please use the two-letter abbreviation.")
+        .required("A state is required."),
+      zipCode: Yup.string()
+        .max(7, "Zip Code must be 7 numbers")
+        .min(5, "Zip Code must be 7 numbers")
+        .required("A Zip Code is required."),
+      date: Yup.date()
+        .min(tomorrow, "All orders must be placed at least 3 days in advance.")
+        .required("A delivery date is required."),
     }),
     onSubmit: (values) => {
       const address_concat = `${values.address}, ${values.aptNumber} ${values.city}, ${values.state} ${values.zipCode}`;
@@ -63,14 +94,13 @@ const ReviewCartWindow = ({ setShowModal }) => {
           quantity: item.quantity,
         };
 
-        await dispatch(createOrderDetails(newOrderDetails));
-
+        dispatch(createOrderDetails(newOrderDetails));
+      });
         localStorage.setItem("currentCart", JSON.stringify({}));
         setShowModal(false);
-        await dispatch(getProducts());
-        await dispatch(getOrdersByUserId(user.id));
+        dispatch(getProducts());
+        dispatch(getOrdersByUserId(user.id));
         history.push("/");
-      });
     },
   });
 
@@ -161,7 +191,9 @@ const ReviewCartWindow = ({ setShowModal }) => {
             value={formik.values.address}
           ></input>
         </div>
-        {formik.touched.address && formik.errors.address ? <p className='cart_error'>{formik.errors.address}</p> : null}
+        {formik.touched.address && formik.errors.address ? (
+          <p className="cart_error">{formik.errors.address}</p>
+        ) : null}
         <div>
           <input
             placeholder="apt number"
@@ -172,7 +204,9 @@ const ReviewCartWindow = ({ setShowModal }) => {
             value={formik.values.aptNumber}
           ></input>
         </div>
-        {formik.touched.aptNumber && formik.errors.aptNumber ? <p className='cart_error'>{formik.errors.aptNumber}</p> : null}
+        {formik.touched.aptNumber && formik.errors.aptNumber ? (
+          <p className="cart_error">{formik.errors.aptNumber}</p>
+        ) : null}
         <div>
           <input
             placeholder="city"
@@ -183,7 +217,9 @@ const ReviewCartWindow = ({ setShowModal }) => {
             value={formik.values.city}
           ></input>
         </div>
-        {formik.touched.city && formik.errors.city ? <p className='cart_error'>{formik.errors.city}</p> : null}
+        {formik.touched.city && formik.errors.city ? (
+          <p className="cart_error">{formik.errors.city}</p>
+        ) : null}
         <div>
           <input
             placeholder="state"
@@ -194,7 +230,9 @@ const ReviewCartWindow = ({ setShowModal }) => {
             value={formik.values.state}
           ></input>
         </div>
-        {formik.touched.state && formik.errors.state ? <p className='cart_error'>{formik.errors.state}</p> : null}
+        {formik.touched.state && formik.errors.state ? (
+          <p className="cart_error">{formik.errors.state}</p>
+        ) : null}
         <div>
           <input
             placeholder="ZIP Code"
@@ -205,8 +243,9 @@ const ReviewCartWindow = ({ setShowModal }) => {
             value={formik.values.zipCode}
           ></input>
         </div>
-        {formik.touched.email && formik.errors.email ? <p className='cart_error'>{formik.errors.zipCode}</p> : null}
-        <gap></gap>
+        {formik.touched.zipCode && formik.errors.zipCode ? (
+          <p className="cart_error">{formik.errors.zipCode}</p>
+        ) : null}
         <div>
           <input
             placeholder="delivery date"
@@ -217,7 +256,9 @@ const ReviewCartWindow = ({ setShowModal }) => {
             value={formik.values.date}
           ></input>
         </div>
-        {formik.touched.date && formik.errors.date ? <p className='cart_error'>{formik.errors.date}</p> : null}
+        {formik.touched.date && formik.errors.date ? (
+          <p className="cart_error">{formik.errors.date}</p>
+        ) : null}
         <button type="submit">Checkout</button>
       </form>
     </div>

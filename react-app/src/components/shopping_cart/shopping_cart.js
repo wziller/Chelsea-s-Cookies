@@ -13,7 +13,7 @@ const Cart_Menu_Display = ({cartStatus, setCartStatus}) => {
     if(currentTotal !== total) setCurrentTotal(total)
 
     useEffect(()=>{
-    },[setCartStatus, cartStatus])
+    },[setCartStatus, cartStatus, currentTotal])
 
     return cartStatus === 'visible' ? (
     <div>

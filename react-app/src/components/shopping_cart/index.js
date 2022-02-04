@@ -4,6 +4,10 @@ import "./shopping_cart.css";
 
 const Shopping_Cart = ({cartStatus, setCartStatus}) => {
 
+  useEffect(()=> {
+
+},[cartStatus])
+
   return(<>
 
     <Cart_Menu_Display cartStatus={cartStatus} setCartStatus={setCartStatus}/>
